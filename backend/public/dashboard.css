@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    overflow: hidden;
+}
+
+#modal{
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    /* width: 100vw;
+    height: 100vh; */
+    align-items: center;
+    justify-content: center;
+    gap: 30px;    
+    background-color: aliceblue;
+    /* overflow: hidden; */
+
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    /* align-items: center; */
+    /* background-color: black; */
+    /* ; */
+}
+
+.top-modal{
+    
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+}
+
+#cerrar-modal{
+    position: absolute;
+    left: 440px;
+    top: -30px;
+    width: 20px;
+    height: 20px;
+}
+
+.contenedor-modal{
+    
+
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    background-color: azure;
+}
+
+#btn-agregar-producto{
+    
+    width: 140px;
+    height: 30px;
+
+}

@@ -9,6 +9,7 @@ const path = require("path");
 const app = express();
 const puerto = 3000;
 
+app.use(express.json());
 // importo el modulo mysql2
 const mysql = require("mysql2");
 
@@ -16,13 +17,15 @@ const mysql = require("mysql2");
 require("dotenv").config({path:"tp_integrador/.env"});
 
 console.log(process.env.PORT);
-// console.log(process..X)
+
+
+
 
 const conexion = mysql.createConnection({
     host: "localhost",
     user: "admin",
     password: "1234",
-    database: "colegio"
+    database: "autoservicio"
 });
 
 conexion.connect((error)=>{
@@ -36,19 +39,7 @@ conexion.connect((error)=>{
 
 })
 
-conexion.query(
-    "SELECT * FROM alumnos",
-    (error,resultado)=>{
-        if(error){
-            console.log(error);
-            return;
-        }
-        else{
-            console.log(resultado);
 
-        }
-    }
-);
 
 
 // Indico a express que se tiene que usar EJS como motor de plantillas .
@@ -58,18 +49,48 @@ app.set("views",path.join(__dirname,"views"));
 
 
 //defino ruta raiz de la web 
-app.use(express.static(path.join(__dirname,"..","public")));
+app.use(express.static(path.join(__dirname,"public")));
 
-app.get("/",(req,res)=>{
+// Se realiza una peticion a la ruta /dashboard del servidor para cargar 
+// el dashboard con sus respectivos productos 
+app.get("/dashboard",(req,res)=>    {
 
-    // res.sendFile(path.join(__dirname,"..","frontend","ingreso.html"));
-    res.render("productos",{
-        nombre:"Adrian"
-    });
 
-    
+    conexion.query("SELECT * FROM productos",(error,resultados)=>{
+        if(error){
+            console.error(error);
+            return res.status(500).send("Error del servidor");
+        }
+        res.render("dashboard",{
+            productos:resultados
+        });
+    })
+
 
 }); 
+
+// Endpoint para agregar un producto 
+app.post("/agregarProducto",(req,res)=>{
+
+    const {nombre,categoria,precio,urlImagen} = req.body;
+    const sql = `INSERT INTO productos (nombre, categoria, precio, activo, imagen)
+    VALUES (?, ?, ?, ?, ?)`;
+
+    conexion.query(sql,[nombre,categoria,precio,1,urlImagen],(error,resultado)=>{
+        if(error)
+        {
+            console.log(error);
+            // Respondo del lado del servidor que algo salio mal.
+            return res.status(500).send("Error");
+
+        }
+
+        //Respondo del lado del servidor que todo esta bien
+        res.json({ ok: true });
+    })
+
+
+})
 
 app.get("/ingreso.css",(req,res)=>{
     
