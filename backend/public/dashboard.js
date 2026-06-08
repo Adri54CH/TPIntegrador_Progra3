@@ -1,3 +1,5 @@
+// const { json } = require("node:stream/consumers");
+
 // Logica para agregar un producto 
 document.querySelector("form").addEventListener("submit",(e)=>{
     e.preventDefault();
@@ -21,7 +23,24 @@ document.querySelector("form").addEventListener("submit",(e)=>{
         console.log(data);
 
         if(data.ok){
-            alert("Producto agregado");
+
+                
+                // Limpio los inputs 
+
+                document.getElementById("input-nombre").value = "";
+                document.getElementById("input-categoria").value = ""
+                document.getElementById("input-precio").value = ""
+                document.getElementById("input-url").value = ""
+
+                // Cierro el modal
+
+                document.getElementById("modal").style.display = "none";
+
+                
+                //renderizo los productos   
+                renderizarProductos();
+
+            
         }
     })
     .catch(error=>console.error(error))
@@ -52,7 +71,7 @@ document.addEventListener("click",(e)=>{
         const id = e.target.dataset.id;
 
 
-        //FDuncion para eliminar el producto
+        //Funcion para eliminar el producto
         eliminarProducto(id);
 
     }
@@ -61,24 +80,53 @@ document.addEventListener("click",(e)=>{
 
 const modalEdicion = document.querySelector(".modal-edicion");
 
-//Logica para editar un producto al presionar 'editar'
+let idProductoEditar = null;
+
+//Logica para mostrar el modal al presionar 'editar' en un producto
 document.addEventListener("click",(e)=>{
     if(e.target.classList.contains("btn-editar")){
     
-        const id = e.target.nextElementSibling.dataset.id;
+        idProductoEditar = e.target.nextElementSibling.dataset.id;
         
         //Se muestra un modal para la carga de nuevos datos
-        
         modalEdicion.style.display = "flex";
 
-        //Funcion para editar un producto
-
-
-
+        
+    
 
     }
 })
 
+// Logica para editar un producto cuando se envia el formulario de nuevos datos
+document.querySelector(".form-edicion").addEventListener("submit",(e)=>
+{
+    e.preventDefault();
+
+        const nuevoNombre = document.getElementById("input-nuevo-nombre").value;
+        const nuevoPrecio = document.getElementById("input-nuevo-precio").value;
+        const nuevaUrl = document.getElementById("input-nueva-url").value;
+        const nuevaCategoria = document.getElementById("input-nueva-categoria").value;
+
+    const productoActualizado = {nuevoNombre,nuevoPrecio,nuevaUrl,nuevaCategoria};
+
+    
+    // Peticion fetch para hacer los cambios 
+
+    fetch(`/editarProducto/${idProductoEditar}`,{
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+            
+        },
+        body: JSON.stringify(productoActualizado)
+    }).then(res => res.json())  
+    .then(res => console.log(res))
+    .catch(error =>{
+        console.log(error);
+
+    })
+
+})
 
 // Logica para cerrar el modal de edicion
 document.querySelector(".cerrar-editar").addEventListener("click",()=>{ 
@@ -87,6 +135,21 @@ document.querySelector(".cerrar-editar").addEventListener("click",()=>{
 })
 
 
+// Funcion para renderizar los productos
+
+async function renderizarProductos(){
+    
+    const productos = await obtenerProductos();
+
+    console.log(productos);
+
+    
+
+    
+     
+    
+
+}
 
 //Funcion para obtener lista de productos 
 function obtenerProductos(){
@@ -106,9 +169,8 @@ function obtenerProductos(){
 
 
 //Funcion para dar la baja logica de un producto dentro del dashboard
-async function eliminarProducto(idProducto){
+function eliminarProducto(idProducto){
     
-    const resultado = await obtenerProductos();
 
     // Peticion delete para eliminar un producto
     fetch(`/eliminarProducto/${idProducto}`,{
@@ -125,9 +187,8 @@ async function eliminarProducto(idProducto){
 
 //Funcion para editar un producto del dashboard
 
-async function editarProducto(idProducto){
+function editarProducto(idProducto){
 
-    const resultado = await obtenerProductos();
 
     fetch(`/editarProducto/${idProducto}`,{
         method: "PUT"

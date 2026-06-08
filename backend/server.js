@@ -76,7 +76,7 @@ app.get("/productos",(req,res)=>{
         if(error){
 
             console.log(error);
-
+            return res.status(500).json({error:"Error en la consulta"});
 
         }
         
@@ -125,13 +125,29 @@ app.delete("/eliminarProducto/:id",(req,res)=>{
     
 })
 
-app.put("/editarProducto",(req,res)=>{
+app.put("/editarProducto/:id",(req,res)=>{
     
-    const id = req.params.id;
+    const id = req.params.id; // obtengo la id enviada por la url 
+    const datos = req.body; // obtengo el objeto enviado mediante el body
+    
+ 
 
+    //Destructuracion del objeto req.body
+    const {nuevoNombre,nuevoPrecio,nuevaUrl,nuevaCategoria} = req.body;
+
+ 
     // Se edita el producto de la base de datos 
 
-    // conexion.query("")
+    conexion.query("UPDATE productos SET nombre = ?,precio = ?,imagen=?,categoria=? WHERE id = ?",[nuevoNombre,nuevoPrecio,nuevaUrl,nuevaCategoria,id],(error,resultado)=>{
+        
+        if(error){
+            
+            return res.status(500).json({error:"Error al actualizar"});
+        }
+
+        res.json({mensaje:"Producto actualizado"});
+
+    })
     
 })
 

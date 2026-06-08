@@ -112,3 +112,19 @@ form{
     left: 550px;
     top: 10px;
 }
+
+.producto-data{
+    
+    /* background-color: salmon; */
+    /* text-align: center; */
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.btn-enviar-nuevo-prod{
+    
+    align-self: center;
+    width: 200px;
+}
