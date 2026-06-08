@@ -19,8 +19,6 @@ require("dotenv").config({path:"tp_integrador/.env"});
 console.log(process.env.PORT);
 
 
-
-
 const conexion = mysql.createConnection({
     host: "localhost",
     user: "admin",
@@ -61,13 +59,30 @@ app.get("/dashboard",(req,res)=>    {
             console.error(error);
             return res.status(500).send("Error del servidor");
         }
+
         res.render("dashboard",{
             productos:resultados
         });
     })
 
 
-}); 
+});
+
+//End point para obtener productos 
+
+app.get("/productos",(req,res)=>{
+    
+    conexion.query("SELECT * FROM productos",(error,resultado)=>{
+        if(error){
+
+            console.log(error);
+
+
+        }
+        
+        res.json(resultado);
+    })
+})
 
 // Endpoint para agregar un producto 
 app.post("/agregarProducto",(req,res)=>{
@@ -90,6 +105,34 @@ app.post("/agregarProducto",(req,res)=>{
     })
 
 
+})
+
+//Endpoint para eliminar un producto 
+
+app.delete("/eliminarProducto/:id",(req,res)=>{
+    
+    const id = req.params.id;
+
+    // Se elimina el producto de la base de datos (baja logica)
+
+    conexion.query("UPDATE productos SET activo = 0 WHERE id = ?",[id],(error,resultado)=>{
+        if(error){
+            return res.status(500).json({error: "Error al eliminar producto"})
+        }
+
+        res.json({mensaje: "Producto eliminado (baja logica)"});
+    })
+    
+})
+
+app.put("/editarProducto",(req,res)=>{
+    
+    const id = req.params.id;
+
+    // Se edita el producto de la base de datos 
+
+    // conexion.query("")
+    
 })
 
 app.get("/ingreso.css",(req,res)=>{

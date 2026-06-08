@@ -4,9 +4,9 @@
     box-sizing: border-box;
 }
 
-body{
+/* body{
     overflow: hidden;
-}
+} */
 
 #modal{
     display: none;
@@ -71,4 +71,44 @@ form{
     width: 140px;
     height: 30px;
 
+}
+
+
+.modal-edicion{
+    
+    display: none;
+    /* flex-direction: column; */
+    /* gap: 30px; */
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    top: 0;
+    left: 0;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-modal{
+    
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 50px;
+    position: relative;
+    
+}
+.producto-data input{
+
+    margin-bottom: 20px;
+    
+    
+}
+
+.cerrar-editar{
+    position: absolute;
+    left: 550px;
+    top: 10px;
 }

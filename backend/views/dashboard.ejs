@@ -36,9 +36,9 @@
 
             <% if(producto.activo) { %>
 
-                <button>Editar</button>
+                <button class="btn-editar">Editar</button>
 
-                <button>Eliminar</button>
+                <button class="btn-eliminar" data-id="<%= producto.id %>">Eliminar</button>
 
             <% } else { %>
 
@@ -96,6 +96,47 @@
 
 
         </div>
+        
+
+    </div>
+    
+    <div class="modal-edicion">
+        
+        <div class="container-modal">
+
+            <h1 class="titulo-h1">Nuevos datos del producto</h1>
+    
+            <div class="producto-data">
+
+                <div class="data-producto">
+
+                    <label for="">Ingrese el nuevo nombre del producto</label>
+                    <input type="text">
+                </div>
+                
+                 <div class="data-producto">
+
+                     <label for="">Ingrese el precio del producto</label>
+                     <input type="text">
+                </div>
+                 <div class="data-producto">
+
+                     <label for="">Ingrese la nueva url del producto</label>
+                     <input type="text">
+                </div>
+                
+                 <div class="data-producto">
+
+                     <label for="">Ingrese la nueva categoria del producto</label>
+                     <input type="text">
+                </div>
+        
+    
+            </div>
+
+            <button class="cerrar-editar">X</button>
+        </div>
+
         
 
     </div>
