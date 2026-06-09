@@ -14,9 +14,11 @@ app.use(express.json());
 const mysql = require("mysql2");
 
 // importo el modulo de env 
-require("dotenv").config({path:"tp_integrador/.env"});
+require("dotenv").config({path:__dirname + "/../.env"});
+
 
 console.log(process.env.PORT);
+console.log(process.env.DB_USER);
 
 
 const conexion = mysql.createConnection({
@@ -151,22 +153,32 @@ app.put("/editarProducto/:id",(req,res)=>{
     
 })
 
-app.get("/ingreso.css",(req,res)=>{
+app.get("/",(req,res)=>{
     
-    res.sendFile(path.join(__dirname,"..","frontend","ingreso.css"));
+    res.sendFile(path.join(__dirname + "/../frontend/ingreso.html"));
 
+    
 })
 
+// app.get("/ingreso.css",(req,res)=>{
+    
+//     res.sendFile(path.join(__dirname,"..","frontend","ingreso.css"));
 
-app.get("/autoservicio.css",(req,res)=>{
-    res.sendFile(path.join(__dirname,"..","frontend","autoservicio.css"));
+// })
 
-})
 
-app.get("/autoservicio.js",(req,res)=>{
-    res.sendFile(path.join(__dirname,"..","frontend","autoservicio.js"));
+// app.get("/autoservicio.css",(req,res)=>{
+//     res.sendFile(path.join(__dirname,"..","frontend","autoservicio.css"));
 
-})
+// })
+
+// app.get("/autoservicio.js",(req,res)=>{
+//     res.sendFile(path.join(__dirname,"..","frontend","autoservicio.js"));
+
+// })
+
+
+
 
 
 app.listen(puerto,()=>{

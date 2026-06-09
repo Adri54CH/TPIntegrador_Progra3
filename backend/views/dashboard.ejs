@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="/dashboard.css">
 </head>
 <body>
 
@@ -13,44 +13,48 @@
             <button id="agregar-producto">Agregar producto</button>
         </a>
 
-    <% productos.forEach(producto => { %>
+        <div class="contenedor-card">
 
-        <div class="card">
-
-            <img
-                src="<%= producto.imagen %>"
-                alt="<%= producto.nombre %>"
-                width="200"
-            >
-
-            <h2><%= producto.nombre %></h2>
-
-            <p>Categoría: <%= producto.categoria %></p>
-
-            <p>Precio: $<%= producto.precio %></p>
-
-            <p>
-                Estado:
-                <%= producto.activo ? "Activo" : "Inactivo" %>
-            </p>
-
-            <% if(producto.activo) { %>
-
-                <button class="btn-editar">Editar</button>
-
-                <button class="btn-eliminar" data-id="<%= producto.id %>">Eliminar</button>
-
-            <% } else { %>
-
-                <button>Activar</button>
-
-            <% } %>
-
+            
+            <% productos.forEach(producto => { %>
+        
+                <div class="card">
+        
+                    <img
+                        src="<%= producto.imagen %>"
+                        alt="<%= producto.nombre %>"
+                        width="200"
+                    >
+        
+                    <h2><%= producto.nombre %></h2>
+        
+                    <p>Categoría: <%= producto.categoria %></p>
+        
+                    <p>Precio: $<%= producto.precio %></p>
+        
+                    <p>
+                        Estado:
+                        <%= producto.activo ? "Activo" : "Inactivo" %>
+                    </p>
+        
+                    <% if(producto.activo) { %>
+        
+                        <button class="btn-editar">Editar</button>
+        
+                        <button class="btn-eliminar" data-id="<%= producto.id %>">Eliminar</button>
+        
+                    <% } else { %>
+        
+                        <button>Activar</button>
+        
+                    <% } %>
+        
+                </div>
+        
+                <hr>
+        
+            <% }) %>
         </div>
-
-        <hr>
-
-    <% }) %>
 
     <div id="modal">
         <div class="contenedor-modal">

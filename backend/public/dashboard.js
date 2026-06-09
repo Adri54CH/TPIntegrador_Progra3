@@ -1,4 +1,3 @@
-// const { json } = require("node:stream/consumers");
 
 // Logica para agregar un producto 
 document.querySelector("form").addEventListener("submit",(e)=>{
@@ -72,7 +71,16 @@ document.addEventListener("click",(e)=>{
 
 
         //Funcion para eliminar el producto
-        eliminarProducto(id);
+        eliminarProducto(id).then(()=>{
+            
+            // Vuelvo a renderizar los productos d
+            renderizarProductos();
+
+        })
+
+        
+
+
 
     }
 
@@ -102,10 +110,10 @@ document.querySelector(".form-edicion").addEventListener("submit",(e)=>
 {
     e.preventDefault();
 
-        const nuevoNombre = document.getElementById("input-nuevo-nombre").value;
-        const nuevoPrecio = document.getElementById("input-nuevo-precio").value;
-        const nuevaUrl = document.getElementById("input-nueva-url").value;
-        const nuevaCategoria = document.getElementById("input-nueva-categoria").value;
+    const nuevoNombre = document.getElementById("input-nuevo-nombre").value;
+    const nuevoPrecio = document.getElementById("input-nuevo-precio").value;
+    const nuevaUrl = document.getElementById("input-nueva-url").value;
+    const nuevaCategoria = document.getElementById("input-nueva-categoria").value;
 
     const productoActualizado = {nuevoNombre,nuevoPrecio,nuevaUrl,nuevaCategoria};
 
@@ -119,8 +127,16 @@ document.querySelector(".form-edicion").addEventListener("submit",(e)=>
             
         },
         body: JSON.stringify(productoActualizado)
-    }).then(res => res.json())  
-    .then(res => console.log(res))
+    }).then(()=>{
+        
+        // Se cierra el modal 
+
+        modalEdicion.style.display = "none";    
+
+        //Renderiza los productos 
+        renderizarProductos();
+
+    })
     .catch(error =>{
         console.log(error);
 
@@ -137,17 +153,44 @@ document.querySelector(".cerrar-editar").addEventListener("click",()=>{
 
 // Funcion para renderizar los productos
 
+
+
 async function renderizarProductos(){
     
     const productos = await obtenerProductos();
-
-    console.log(productos);
-
     
+    const contenedorCard = document.querySelector(".contenedor-card");
 
     
-     
-    
+    contenedorCard.innerHTML = "";
+
+    productos.forEach((producto)=>{
+        
+        contenedorCard.innerHTML += `
+            <div class="card">
+                <img src="${producto.imagen}" width="200">
+
+                <h2>${producto.nombre}</h2>
+                <p>Categoría: ${producto.categoria}</p>
+                <p>Precio: $${producto.precio}</p>
+                <p>Estado: ${producto.activo ? "Activo" : "Inactivo"}</p>
+
+                ${
+                    producto.activo
+                    ? `
+                        <button class="btn-editar">Editar</button>
+                        <button class="btn-eliminar" data-id="${producto.id}">
+                            Eliminar
+                        </button>
+                      `
+                    : `<button>Activar</button>`
+                }
+            </div>
+
+            <hr>
+        `;
+
+    })
 
 }
 
@@ -163,7 +206,7 @@ function obtenerProductos(){
         console.log(error);
     });
 
-
+    
 }
 
 
@@ -173,7 +216,7 @@ function eliminarProducto(idProducto){
     
 
     // Peticion delete para eliminar un producto
-    fetch(`/eliminarProducto/${idProducto}`,{
+    return fetch(`/eliminarProducto/${idProducto}`,{
         method: "DELETE"
     }).then(res => res.json())
     .then(res => console.log(res))
