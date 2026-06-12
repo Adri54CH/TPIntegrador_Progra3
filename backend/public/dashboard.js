@@ -94,13 +94,31 @@ let idProductoEditar = null;
 document.addEventListener("click",(e)=>{
     if(e.target.classList.contains("btn-editar")){
     
-        idProductoEditar = e.target.nextElementSibling.dataset.id;
+        const card = e.target.closest(".card");
+
+        console.log(card.innerHTML);
+        idProductoEditar = card.querySelector(".btn-eliminar").dataset.id;
+
+        const nombreProductoEditar = card.querySelector(".nombre-producto").textContent;
+        const precioProductoEditar = card.querySelector(".precio-producto").textContent;
+        const urlProductoEditar = card.querySelector(".img-producto").src;
+        const categoriaProductoEditar = card.querySelector(".categoria-producto").textContent;
         
+
+        // console.log(nombreProductoEditar);
+
+        // ("input-nuevo-nombre").value = nuevoNombre;
+    // modalEdicion.getElementById("input-nuevo-precio").value = nuevoPrecio;
+    // modalEdicion.getElementById("input-nueva-url").value = nuevaUrl;
+    // modalEdicion.getElementById("input-nueva-categoria").value = nuevaCategoria;
+
         //Se muestra un modal para la carga de nuevos datos
         modalEdicion.style.display = "flex";
 
-        
-    
+        // Se cargan los datos al modal para su posterior modificacion 
+
+        cargarInputsFormulario(nombreProductoEditar,precioProductoEditar,urlProductoEditar,categoriaProductoEditar);
+
 
     }
 })
@@ -108,6 +126,7 @@ document.addEventListener("click",(e)=>{
 // Logica para editar un producto cuando se envia el formulario de nuevos datos
 document.querySelector(".form-edicion").addEventListener("submit",(e)=>
 {
+    
     e.preventDefault();
 
     const nuevoNombre = document.getElementById("input-nuevo-nombre").value;
@@ -134,12 +153,11 @@ document.querySelector(".form-edicion").addEventListener("submit",(e)=>
         modalEdicion.style.display = "none";    
 
         //Renderiza los productos 
-        renderizarProductos();
+        renderizarProductos();  
 
     })
     .catch(error =>{
         console.log(error);
-
     })
 
 })
@@ -239,6 +257,18 @@ function editarProducto(idProducto){
     .then(res => console.log(res));
 
     
+
+
+}
+
+//Funcion para cargar datos al formulario de edicion de un producto
+
+function cargarInputsFormulario(nombreProducto,precioProducto,urlProducto,categoriaProducto){
+
+    modalEdicion.querySelector("#input-nuevo-nombre").value = nombreProducto;
+    modalEdicion.querySelector("#input-nuevo-precio").value = precioProducto;
+    modalEdicion.querySelector("#input-nueva-url").value = urlProducto;
+    modalEdicion.querySelector("#input-nueva-categoria").value = categoriaProducto;
 
 
 }

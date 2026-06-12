@@ -24,13 +24,14 @@
                         src="<%= producto.imagen %>"
                         alt="<%= producto.nombre %>"
                         width="200"
+                        class="img-producto"
                     >
         
-                    <h2><%= producto.nombre %></h2>
+                    <h2 class="nombre-producto"><%= producto.nombre %></h2>
         
-                    <p>Categoría: <%= producto.categoria %></p>
+                    <p class="categoria-producto">Categoría: <%= producto.categoria %></p>
         
-                    <p>Precio: $<%= producto.precio %></p>
+                    <p class="precio-producto">Precio: $<%= producto.precio %></p>
         
                     <p>
                         Estado:
@@ -138,9 +139,9 @@
                          <input type="text" id="input-nueva-categoria">
                     </div>
             
-                    <button class="btn-enviar-nuevo-prod">Confirmar datos</button>
+                    <button type="button" class="btn-enviar-nuevo-prod">Confirmar datos</button>
                 </div>
-                <button class="cerrar-editar">X</button>
+                <button type="button" class="cerrar-editar">X</button>
             </form>
 
         </div>

@@ -129,22 +129,25 @@ app.delete("/eliminarProducto/:id",(req,res)=>{
 
 app.put("/editarProducto/:id",(req,res)=>{
     
+
     const id = req.params.id; // obtengo la id enviada por la url 
     const datos = req.body; // obtengo el objeto enviado mediante el body
     
  
+    
 
     //Destructuracion del objeto req.body
     const {nuevoNombre,nuevoPrecio,nuevaUrl,nuevaCategoria} = req.body;
-
+    const nuevoPrecioLimpio = nuevoPrecio.replace("Precio: $","");
+    const nuevoCategoriaLimpio = nuevaCategoria.replace("Categoría: ", "");
  
     // Se edita el producto de la base de datos 
 
     conexion.query("UPDATE productos SET nombre = ?,precio = ?,imagen=?,categoria=? WHERE id = ?",[nuevoNombre,nuevoPrecio,nuevaUrl,nuevaCategoria,id],(error,resultado)=>{
         
         if(error){
-            
             return res.status(500).json({error:"Error al actualizar"});
+            
         }
 
         res.json({mensaje:"Producto actualizado"});
