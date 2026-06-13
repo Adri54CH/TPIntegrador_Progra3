@@ -172,6 +172,47 @@ document.querySelector(".cerrar-editar").addEventListener("click",()=>{
 // Funcion para renderizar los productos
 
 
+// Logica para volver a activar un producto (alta logica)
+document.addEventListener("click",(e)=>{
+    if(e.target.classList.contains("btn-activar")){
+
+
+        const idProducto = e.target.closest(".card").dataset.id;
+
+
+        // Peticion para activar  producto
+
+        activarProducto(idProducto);
+
+        
+
+    }
+})
+
+function activarProducto(idProducto){
+
+    fetch(`/activarProducto/${idProducto}`,{
+        method: "PUT",
+
+    }).then(res => res.json())
+    .then(res => {
+        
+        console.log(res);
+
+
+        // Renderizo los productos
+        renderizarProductos();
+
+
+        
+    });
+
+    
+
+    
+
+
+}
 
 async function renderizarProductos(){
     
@@ -181,16 +222,17 @@ async function renderizarProductos(){
 
     
     contenedorCard.innerHTML = "";
-
+    
     productos.forEach((producto)=>{
         
+        
         contenedorCard.innerHTML += `
-            <div class="card">
+            <div class="card" data-id="${producto.id}">
                 <img src="${producto.imagen}" width="200">
 
-                <h2>${producto.nombre}</h2>
-                <p>Categoría: ${producto.categoria}</p>
-                <p>Precio: $${producto.precio}</p>
+                <h2 class="nombre-producto">${producto.nombre}</h2>
+                <p class="categoria-producto">Categoría: ${producto.categoria}</p>
+                <p class="precio-producto">Precio: $${producto.precio}</p>
                 <p>Estado: ${producto.activo ? "Activo" : "Inactivo"}</p>
 
                 ${
@@ -201,7 +243,7 @@ async function renderizarProductos(){
                             Eliminar
                         </button>
                       `
-                    : `<button>Activar</button>`
+                    : `<button class="btn-activar">Activar</button>`
                 }
             </div>
 
@@ -272,3 +314,4 @@ function cargarInputsFormulario(nombreProducto,precioProducto,urlProducto,catego
 
 
 }
+

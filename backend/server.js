@@ -163,6 +163,28 @@ app.get("/",(req,res)=>{
     
 })
 
+app.put("/activarProducto/:idProducto",(req,res)=>{
+    
+    const id = req.params.idProducto;
+
+
+    conexion.query("UPDATE productos SET activo = true WHERE id = ?",[id],(error,resultado)=>{
+
+
+        if(error){
+            console.log(error);
+            return res.json({error:"Error en la conexion"});
+
+        }
+
+        return res.json({mensaje:"Producto activado con exito"});
+
+    })
+
+
+
+})
+
 // app.get("/ingreso.css",(req,res)=>{
     
 //     res.sendFile(path.join(__dirname,"..","frontend","ingreso.css"));

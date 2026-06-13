@@ -18,7 +18,7 @@
             
             <% productos.forEach(producto => { %>
         
-                <div class="card">
+                <div class="card" data-id="<%= producto.id %>">
         
                     <img
                         src="<%= producto.imagen %>"
@@ -46,7 +46,7 @@
         
                     <% } else { %>
         
-                        <button>Activar</button>
+                        <button class="btn-activar">Activar</button>
         
                     <% } %>
         
