@@ -12,6 +12,7 @@ const puerto = 3000;
 app.use(express.json());
 // importo el modulo mysql2
 const mysql = require("mysql2");
+const { appendFile } = require("fs");
 
 // importo el modulo de env 
 require("dotenv").config({path:__dirname + "/../.env"});
@@ -184,6 +185,19 @@ app.put("/activarProducto/:idProducto",(req,res)=>{
 
 
 })
+
+// Endpoint para servir el archivo 'loginAdministrador.html'
+
+
+    app.get("/loginAdministrador",(req,res)=>{
+        
+        res.sendFile(path.join(__dirname,"/frontend/loginAdministrador.html"));
+
+        
+    });
+
+
+
 
 // app.get("/ingreso.css",(req,res)=>{
     
