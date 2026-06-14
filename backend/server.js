@@ -13,6 +13,7 @@ app.use(express.json());
 // importo el modulo mysql2
 const mysql = require("mysql2");
 const { appendFile } = require("fs");
+const { fileLoader } = require("ejs");
 
 // importo el modulo de env 
 require("dotenv").config({path:__dirname + "/../.env"});
@@ -206,6 +207,61 @@ app.get("/loginAdministrador.css",(req,res)=>{
 
 
 })
+
+app.get("/loginAdministrador.js",(req,res)=>{
+    
+    res.sendFile(path.join(__dirname,"../frontend/loginAdministrador.js"));
+
+
+})
+
+
+app.post("/formLogin", async (req,res)=>{
+    
+    const datos = req.body;
+    const {email,contrasena} = datos;
+
+    const usuario = await buscarUsuarioPorEmail(email);
+    
+    if(!usuario){ 
+        
+        // uso de return para terminar la funcion 
+        return res.json({mensaje:"usuario no valido"})
+    }
+  
+
+    // verifico que la contraseña coincida
+    if(usuario.password === contrasena){
+
+        return res.json({mensaje: "usuario valido"});
+
+
+    }
+
+    return res.json({mensaje:"contraseña incorrecta"});
+
+
+
+ 
+    
+
+
+
+
+
+})
+
+//Funcion para hacer la validacion por correo del usuario 
+async function buscarUsuarioPorEmail(correo){
+
+    const [filas] = await conexion.query("SELECT * FROM usuarios WHERE correo = ?",[correo]);
+
+    return filas[0];
+
+
+    
+
+}
 
 // app.get("/ingreso.css",(req,res)=>{
     
