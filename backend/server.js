@@ -19,9 +19,6 @@ const { fileLoader } = require("ejs");
 require("dotenv").config({path:__dirname + "/../.env"});
 
 
-console.log(process.env.PORT);
-console.log(process.env.DB_USER);
-
 
 const conexion = mysql.createConnection({
     host: "localhost",
@@ -158,12 +155,7 @@ app.put("/editarProducto/:id",(req,res)=>{
     
 })
 
-app.get("/",(req,res)=>{
-    
-    res.sendFile(path.join(__dirname + "/../frontend/ingreso.html"));
 
-    
-})
 
 app.put("/activarProducto/:idProducto",(req,res)=>{
     
@@ -258,7 +250,7 @@ async function buscarUsuarioPorEmail(correo){
 
     return filas[0];
 
-
+    
     
 
 }
