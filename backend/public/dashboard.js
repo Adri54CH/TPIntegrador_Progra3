@@ -218,6 +218,9 @@ async function renderizarProductos(){
     
     const productos = await obtenerProductos();
     
+    console.log(productos);
+
+    
     const contenedorCard = document.querySelector(".contenedor-card");
 
     
@@ -260,7 +263,11 @@ function obtenerProductos(){
     return fetch("/productos")
     .then(res => res.json())
     .then(data => {
-        return data;
+        
+    
+        return data.productos;
+
+
     })
     .catch(error =>{
         console.log(error);

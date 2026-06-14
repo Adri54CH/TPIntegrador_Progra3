@@ -1,11 +1,12 @@
 document.querySelector(".form-datos").addEventListener("submit",(e)=>{
-   
+
     e.preventDefault();
     
     const email = document.querySelector(".correo-login").value;
     const contrasena = document.querySelector(".contrasena-login").value;
 
-   const datos = {email,contrasena};
+    const datos = {email,contrasena};
+
 
 
     fetch("/formLogin",{
@@ -17,16 +18,16 @@ document.querySelector(".form-datos").addEventListener("submit",(e)=>{
     }).then(res => res.json())
     .then(res => {
         //no se encontro al usuario
-        if(res.mensaje === "usuario no encontrado"){
+        if(res.mensaje === "usuario no valido" || res.mensaje === "contraseña incorrecta"){
 
-            alert("Ingrese un uusario valido");
+            alert("Ingrese un usuario valido");
             
         }
         // se encontro al usuario
         else{
 
             // se hace una peticion para cargar una nueva pagina 
-            window.location.href = "/loginAdministrador.html";
+            window.location.href = "/dashboard";
 
 
         }

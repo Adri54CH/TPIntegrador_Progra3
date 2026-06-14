@@ -11,32 +11,19 @@ const puerto = 3000;
 
 app.use(express.json());
 // importo el modulo mysql2
-const mysql = require("mysql2");
-const { appendFile } = require("fs");
-const { fileLoader } = require("ejs");
 
 // importo el modulo de env 
 require("dotenv").config({path:__dirname + "/../.env"});
 
+const mysql = require("mysql2/promise");
 
 
-const conexion = mysql.createConnection({
+const pool = mysql.createPool({
     host: "localhost",
     user: "admin",
     password: "1234",
     database: "autoservicio"
 });
-
-conexion.connect((error)=>{
-    if(error){
-        console.log("Error al conectar:",error);
-        return;
-
-    }
-    console.log("Conectado a mysql");
-
-
-})
 
 
 
@@ -50,130 +37,124 @@ app.set("views",path.join(__dirname,"views"));
 //defino ruta raiz de la web 
 app.use(express.static(path.join(__dirname,"public")));
 
-// Se realiza una peticion a la ruta /dashboard del servidor para cargar 
+// Se realiza una peticion a la ruta /dashboardf del servidor para cargar 
 // el dashboard con sus respectivos productos 
-app.get("/dashboard",(req,res)=>    {
+app.get("/dashboard",async (req,res)=>    {
 
 
-    conexion.query("SELECT * FROM productos",(error,resultados)=>{
-        if(error){
-            console.error(error);
-            return res.status(500).send("Error del servidor");
-        }
+    const [resultados] = await pool.query("SELECT * FROM productos");
 
-        res.render("dashboard",{
-            productos:resultados
+    res.render("dashboard", {
+            productos: resultados
         });
-    })
+
+
 
 
 });
 
 //End point para obtener productos 
 
-app.get("/productos",(req,res)=>{
+app.get("/productos",async(req,res)=>{
     
-    conexion.query("SELECT * FROM productos",(error,resultado)=>{
-        if(error){
-
-            console.log(error);
-            return res.status(500).json({error:"Error en la consulta"});
-
-        }
+    try{
         
-        res.json(resultado);
-    })
+        // obtengo el resulado de la query
+        const resultado = await pool.query("SELECT * FROM productos");
+        // Me quedo con el array de productos 'productos'
+        const [productos] = resultado;
+        
+
+
+        res.json({ok:true,productos});
+
+    }
+    catch(error)
+    {
+        res.json({ok:false});
+    }
+
 })
 
 // Endpoint para agregar un producto 
-app.post("/agregarProducto",(req,res)=>{
+app.post("/agregarProducto",async (req,res)=>{
 
     const {nombre,categoria,precio,urlImagen} = req.body;
     const sql = `INSERT INTO productos (nombre, categoria, precio, activo, imagen)
     VALUES (?, ?, ?, ?, ?)`;
 
-    conexion.query(sql,[nombre,categoria,precio,1,urlImagen],(error,resultado)=>{
-        if(error)
-        {
-            console.log(error);
-            // Respondo del lado del servidor que algo salio mal.
-            return res.status(500).send("Error");
+    try{
+    
 
-        }
+        await pool.query(sql,[nombre,categoria,precio,1,urlImagen]);
+        res.json({ok:true});
 
-        //Respondo del lado del servidor que todo esta bien
-        res.json({ ok: true });
-    })
+    }
+    catch(error)
+    {
+        console.log(error);
+        res.json({ok:false});
+
+
+    }
+
+
 
 
 })
 
 //Endpoint para eliminar un producto 
 
-app.delete("/eliminarProducto/:id",(req,res)=>{
+app.delete("/eliminarProducto/:id",async (req,res)=>{
     
     const id = req.params.id;
 
     // Se elimina el producto de la base de datos (baja logica)
 
-    conexion.query("UPDATE productos SET activo = 0 WHERE id = ?",[id],(error,resultado)=>{
-        if(error){
-            return res.status(500).json({error: "Error al eliminar producto"})
-        }
+    const [resultado]= await pool.query("UPDATE productos SET activo = 0 WHERE id = ?",[id]);
 
-        res.json({mensaje: "Producto eliminado (baja logica)"});
-    })
+    // todo salio bien 
+    res.json({success:true});
+
     
 })
 
-app.put("/editarProducto/:id",(req,res)=>{
+app.put("/editarProducto/:id",async (req,res)=>{
     
 
     const id = req.params.id; // obtengo la id enviada por la url 
     const datos = req.body; // obtengo el objeto enviado mediante el body
     
- 
+
     
 
     //Destructuracion del objeto req.body
     const {nuevoNombre,nuevoPrecio,nuevaUrl,nuevaCategoria} = req.body;
     const nuevoPrecioLimpio = nuevoPrecio.replace("Precio: $","");
     const nuevoCategoriaLimpio = nuevaCategoria.replace("Categoría: ", "");
- 
+
     // Se edita el producto de la base de datos 
 
-    conexion.query("UPDATE productos SET nombre = ?,precio = ?,imagen=?,categoria=? WHERE id = ?",[nuevoNombre,nuevoPrecio,nuevaUrl,nuevaCategoria,id],(error,resultado)=>{
-        
-        if(error){
-            return res.status(500).json({error:"Error al actualizar"});
-            
-        }
 
-        res.json({mensaje:"Producto actualizado"});
+    await pool.query("UPDATE productos SET nombre = ?,precio = ?,imagen=?,categoria=? WHERE id = ?",[nuevoNombre,nuevoPrecio,nuevaUrl,nuevaCategoria,id]);
 
-    })
+    res.json({mensaje:"se edito el producto con exito"});
+
+    
     
 })
 
 
-
-app.put("/activarProducto/:idProducto",(req,res)=>{
+// Endpoint para dar de alta un producto
+app.put("/activarProducto/:idProducto",async (req,res)=>{
     
     const id = req.params.idProducto;
 
 
-    conexion.query("UPDATE productos SET activo = true WHERE id = ?",[id],(error,resultado)=>{
+    await pool.query("UPDATE productos SET activo = true WHERE id = ?",[id]);
 
+    res.json({mensaje:"producto activado"});
 
-        if(error){
-            console.log(error);
-            return res.json({error:"Error en la conexion"});
-
-        }
-
-        return res.json({mensaje:"Producto activado con exito"});
-
-    })
 
 
 
@@ -216,14 +197,12 @@ app.post("/formLogin", async (req,res)=>{
     const usuario = await buscarUsuarioPorEmail(email);
     
     if(!usuario){ 
-        
         // uso de return para terminar la funcion 
         return res.json({mensaje:"usuario no valido"})
     }
-  
 
     // verifico que la contraseña coincida
-    if(usuario.password === contrasena){
+    if(usuario.contrasena === contrasena){
 
         return res.json({mensaje: "usuario valido"});
 
@@ -234,8 +213,8 @@ app.post("/formLogin", async (req,res)=>{
 
 
 
- 
-    
+
+
 
 
 
@@ -246,31 +225,14 @@ app.post("/formLogin", async (req,res)=>{
 //Funcion para hacer la validacion por correo del usuario 
 async function buscarUsuarioPorEmail(correo){
 
-    const [filas] = await conexion.query("SELECT * FROM usuarios WHERE correo = ?",[correo]);
+    const [filas] = await pool.query("SELECT * FROM usuarios WHERE correo = ?",[correo]);
 
     return filas[0];
 
-    
+
     
 
 }
-
-// app.get("/ingreso.css",(req,res)=>{
-    
-//     res.sendFile(path.join(__dirname,"..","frontend","ingreso.css"));
-
-// })
-
-
-// app.get("/autoservicio.css",(req,res)=>{
-//     res.sendFile(path.join(__dirname,"..","frontend","autoservicio.css"));
-
-// })
-
-// app.get("/autoservicio.js",(req,res)=>{
-//     res.sendFile(path.join(__dirname,"..","frontend","autoservicio.js"));
-
-// })
 
 
 
