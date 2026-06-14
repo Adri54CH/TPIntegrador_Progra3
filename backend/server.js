@@ -189,15 +189,23 @@ app.put("/activarProducto/:idProducto",(req,res)=>{
 // Endpoint para servir el archivo 'loginAdministrador.html'
 
 
-    app.get("/loginAdministrador",(req,res)=>{
-        
-        res.sendFile(path.join(__dirname,"/frontend/loginAdministrador.html"));
+app.get("/loginAdministrador",(req,res)=>{
 
-        
-    });
+    res.sendFile(path.join(__dirname,"../frontend/loginAdministrador.html")); 
 
 
 
+
+});
+
+
+
+app.get("/loginAdministrador.css",(req,res)=>{
+    
+    res.sendFile(path.join(__dirname,"../frontend/loginAdministrador.css"));
+
+
+})
 
 // app.get("/ingreso.css",(req,res)=>{
     

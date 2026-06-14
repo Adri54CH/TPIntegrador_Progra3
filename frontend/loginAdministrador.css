@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;    
+    color: black;
+}
+
+.login-administrador h1{
+    font-size: 30px;
+    font-weight: 500;
+
+}
+.login-administrador{
+    
+    
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    /* padding: 200px 40px; */
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: rgb(247, 247, 247);
+    height: 300px;
+    width: 500px;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-datos{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    /* gap: 100px; */
+    /* padding: 60px; */
+    /* background-color: pink; */
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: aliceblue;
+}
+
+label{
+    font-size: 20px;
+    font-weight: 500;
+}
+input{
+    width: 250px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid black;
+    color: black;
+    font-size: 15px;
+    padding: 0px 2px;
+    /* border: none; */
+    /* background-color: pink; */
+}
+
+button{
+    margin-top: 20px;
+    /* padding: 10px 50px;
+     */
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: rgb(187, 193, 197);
+    color: black;
+    border: 1px solid black;
+    border-radius: 15px;
+    transition: 0.6s;
+}
+
+button:hover{
+    
+    background-color: rgb(152, 167, 167);
+    
+}
