@@ -128,3 +128,44 @@ form{
     align-self: center;
     width: 200px;
 }
+
+.modal-eliminacion{
+
+    display: none;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+
+    
+}
+
+.container-modal h3{
+    font-size: 20px;
+    font-family: sans-serif;
+    
+}
+.botones-modal{
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn-confirmar-eliminacion, .cancelar-eliminacion{
+    
+    padding: 10px 60px;
+    border-radius: 12px;
+    border: 1px solid black;
+    transition: 0.5s;
+    background-color: white;
+    cursor: pointer;
+}
+
+.btn-confirmar-eliminacion:hover, .cancelar-eliminacion:hover{
+
+    background-color: rgb(175, 168, 168);
+}

@@ -85,7 +85,7 @@ app.post("/agregarProducto",async (req,res)=>{
 
     try{
     
-
+        
         await pool.query(sql,[nombre,categoria,precio,1,urlImagen]);
         res.json({ok:true});
 
