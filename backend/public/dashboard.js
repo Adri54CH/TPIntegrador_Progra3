@@ -114,7 +114,6 @@ document.addEventListener("click",(e)=>{
     
         const card = e.target.closest(".card");
 
-        console.log(card.innerHTML);
         idProductoEditar = card.querySelector(".btn-eliminar").dataset.id;
 
         const nombreProductoEditar = card.querySelector(".nombre-producto").textContent;
@@ -144,7 +143,6 @@ document.addEventListener("click",(e)=>{
 // Logica para editar un producto cuando se envia el formulario de nuevos datos
 document.querySelector(".form-edicion").addEventListener("submit",(e)=>
 {
-    
     e.preventDefault();
 
     const nuevoNombre = document.getElementById("input-nuevo-nombre").value;
@@ -249,7 +247,7 @@ async function renderizarProductos(){
         
         contenedorCard.innerHTML += `
             <div class="card" data-id="${producto.id}">
-                <img src="${producto.imagen}" width="200">
+                <img src="${producto.imagen}" width="200" class="img-producto">
 
                 <h2 class="nombre-producto">${producto.nombre}</h2>
                 <p class="categoria-producto">Categoría: ${producto.categoria}</p>

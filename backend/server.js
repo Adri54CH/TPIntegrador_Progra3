@@ -136,7 +136,7 @@ app.put("/editarProducto/:id",async (req,res)=>{
     // Se edita el producto de la base de datos 
 
 
-    await pool.query("UPDATE productos SET nombre = ?,precio = ?,imagen=?,categoria=? WHERE id = ?",[nuevoNombre,nuevoPrecio,nuevaUrl,nuevaCategoria,id]);
+    await pool.query("UPDATE productos SET nombre = ?,precio = ?,imagen=?,categoria=? WHERE id = ?",[nuevoNombre,nuevoPrecioLimpio,nuevaUrl,nuevoCategoriaLimpio,id]);
 
     res.json({mensaje:"se edito el producto con exito"});
 
