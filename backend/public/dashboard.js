@@ -62,7 +62,7 @@ document.getElementById("cerrar-modal").addEventListener("click",()=>{
 
 
 const modalEliminacion = document.querySelector(".modal-eliminacion");
-const idProductoEliminar = null;
+let idProductoEliminar = null;
 
 //Logica para eliminar un producto al presionar boton eliminar del elemento DOM.
 document.addEventListener("click",(e)=>{
@@ -74,11 +74,12 @@ document.addEventListener("click",(e)=>{
         // Se muestra el modal para confirmar la eliminacion
         modalEliminacion.style.display = "flex";
 
+                
         
         idProductoEliminar = e.target.dataset.id;
 
-
-
+        
+    
     }
 
 })
@@ -92,12 +93,17 @@ document.querySelector(".btn-confirmar-eliminacion").addEventListener("click",()
         
         // Vuelvo a renderizar los productos d
         renderizarProductos();
+        
+        // Ocultar el modal de confirmacion 
+
+        modalEliminacion.style.display = "none";
+
 
     })
 
 })
 
-document.querySelector(".cancelar-eliminacion").addEventListener("click",()=>{
+document.querySelector(".cancelar-modal").addEventListener("click",()=>{
     
     modalEliminacion.style.display = "none";
     

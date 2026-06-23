@@ -108,7 +108,6 @@ app.post("/agregarProducto",async (req,res)=>{
 app.delete("/eliminarProducto/:id",async (req,res)=>{
     
     const id = req.params.id;
-
     // Se elimina el producto de la base de datos (baja logica)
 
     const [resultado]= await pool.query("UPDATE productos SET activo = 0 WHERE id = ?",[id]);

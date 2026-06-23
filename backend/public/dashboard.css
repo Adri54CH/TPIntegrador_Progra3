@@ -155,7 +155,7 @@ form{
     justify-content: space-around;
 }
 
-.btn-confirmar-eliminacion, .cancelar-eliminacion{
+.btn-confirmar-modal, .cancelar-modal{
     
     padding: 10px 60px;
     border-radius: 12px;
@@ -165,7 +165,12 @@ form{
     cursor: pointer;
 }
 
-.btn-confirmar-eliminacion:hover, .cancelar-eliminacion:hover{
+.btn-confirmar-modal:hover, .cancelar-modal:hover{
 
     background-color: rgb(175, 168, 168);
+}
+
+.modal-activacion{
+    
+    display: none;
 }
