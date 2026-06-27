@@ -103,13 +103,23 @@ document.querySelector(".btn-confirmar-eliminacion").addEventListener("click",()
 
 })
 
-document.querySelector(".cancelar-modal").addEventListener("click",()=>{
-    
+
+
+document.querySelector(".cancelar-eliminacion").addEventListener("click",()=>{
+
     modalEliminacion.style.display = "none";
     
 
 })
 
+
+
+document.querySelector(".cancelar-activacion").addEventListener("click",()=>{
+
+    modalActivacion.style.display = "none";
+
+
+})
 const modalEdicion = document.querySelector(".modal-edicion");
 
 let idProductoEditar = null;
@@ -193,24 +203,41 @@ document.querySelector(".cerrar-editar").addEventListener("click",()=>{
 
 // Funcion para renderizar los productos
 
-
-// Logica para volver a activar un producto (alta logica)
+let idProductoActivar = null;
+const modalActivacion = document.querySelector(".modal-activacion");
+// Logica para mostrar el modal de activacion  de un producto 
 document.addEventListener("click",(e)=>{
     if(e.target.classList.contains("btn-activar")){
 
 
-        const idProducto = e.target.closest(".card").dataset.id;
+        // Me guardo la id del producto
+        idProductoActivar = e.target.closest(".card").dataset.id;
 
 
-        // Peticion para activar  producto
+        // Muestro el modal de confirmacion
 
-        activarProducto(idProducto);
+        modalActivacion.style.display = "flex"
+
 
         
-
     }
 })
 
+// Logica para activar el producto al confirmar la activacion del producto (alta logica )
+document.querySelector(".btn-confirmar-activacion").addEventListener("click",()=>{
+    
+    // Peticion para activar  producto
+
+
+    activarProducto(idProductoActivar);
+
+    // Dejar de mostrar el modal 
+
+    modalActivacion.style.display = "none";
+
+
+    
+})
 function activarProducto(idProducto){
 
     fetch(`/activarProducto/${idProducto}`,{
