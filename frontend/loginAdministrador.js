@@ -9,7 +9,7 @@ document.querySelector(".form-datos").addEventListener("submit",(e)=>{
 
 
 
-    fetch("/formLogin",{
+    fetch("/login/validarLogin",{
         method: "POST",
         headers: {
             "Content-Type":"application/json"

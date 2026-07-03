@@ -12,7 +12,7 @@ router.get("/productos",productController.obtenerProductos);
 router.post("/agregarProducto",productController.agregarProducto);
 
 // Endpoint para eliminar un producto
-router.post("/eliminarProducto/:id",productController.eliminarProducto);
+router.delete("/eliminarProducto/:id",productController.eliminarProducto);
 
 //Endpoint para editar un producto 
 
@@ -22,17 +22,9 @@ router.put("/editarProducto/:id",productController.editarProducto);
 
 router.put("/activarProducto/:idProducto",productController.activarProducto);
 
+// Endpoint para obtener un producto por su ID
 
-
-
-
-
-
-
-
-
-
-
+router.get("/producto/:id",productController.obtenerProducto);
 
 
 

@@ -5,7 +5,6 @@ const dashboardRouter = express.Router();
 
 const dashboardController = require("../controllers/dashboardController");
 
-// 'Se define el controlador para este grupo rutas '
 dashboardRouter.get("/",dashboardController.mostrarDashboard);
 
 

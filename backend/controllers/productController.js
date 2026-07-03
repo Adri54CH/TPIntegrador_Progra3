@@ -24,7 +24,8 @@ const agregarProducto = async(req,res)=>{
     const {nombre,categoria,precio,urlImagen} = req.body;
 
 
-    await productModel.agregarProducto();
+
+    await productModel.agregarProducto(nombre,categoria,precio,urlImagen);
 
     res.json({ok:true});
 
@@ -35,12 +36,11 @@ const agregarProducto = async(req,res)=>{
 
 const eliminarProducto = async(req,res)=>{
 
-
     const id = req.params.id;
 
     // Se elimina el producto de la base de datos (baja logica)
 
-    await productModel.eliminarProducto();
+    await productModel.eliminarProducto(id);
 
     // todo salio bien 
     res.json({success:true});
@@ -72,9 +72,22 @@ const activarProducto = async(req,res)=>{
     const id = req.params.idProducto;
 
 
-    await productModel.activarProducto();
+    await productModel.activarProducto(id);
 
     res.json({mensaje:"Producto activado"});
+
+
+}
+
+const obtenerProducto = async(req,res)=>{
+
+    const id = req.params.id;
+
+    const producto = await productModel.obtenerProducto(id);
+
+
+    res.json({mensaje:"Producto obtenido con exito",producto});
+
 
 
 }
@@ -87,6 +100,7 @@ module.exports = {
     agregarProducto,
     eliminarProducto,
     editarProducto,
-    activarProducto
+    activarProducto,
+    obtenerProducto
 };
 

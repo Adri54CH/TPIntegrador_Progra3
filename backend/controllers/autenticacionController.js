@@ -27,7 +27,7 @@ const validarLogin = async(req,res)=>{
     const datos = req.body;
     const {email,contrasena} = datos;
 
-    const usuario = await autenticacionModel.validarLogin();
+    const usuario = await autenticacionModel.validarLogin(email);
 
     if(!usuario){ 
         // uso de return para terminar la funcion 

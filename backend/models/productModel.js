@@ -23,7 +23,7 @@ const obtenerTodos = async()=>{
 
 }
 
-const agregarProducto = async() =>{
+const agregarProducto = async(nombre,categoria,precio,urlImagen) =>{
 
 
     try{
@@ -47,9 +47,9 @@ const agregarProducto = async() =>{
     }
 }
 
-const eliminarProducto = async()=>{
+const eliminarProducto = async(id)=>{
 
-
+    
     try{
         
 
@@ -83,7 +83,7 @@ const editarProducto = async()=>{
     }
 }
 
-const activarProducto = async()=>{
+const activarProducto = async(id)=>{
 
 
     try{
@@ -99,7 +99,22 @@ const activarProducto = async()=>{
     }
 }
 
+const obtenerProducto = async(id)=>{
 
+    try{
+    
+        const [rows] = await pool.query("SELECT * FROM productos WHERE id = ?",[id]);
+        
+        return rows[0];
+    }
+
+    catch(error){
+
+        console.log(error);
+
+
+    }
+} 
 
 
 module.exports = {
@@ -107,6 +122,7 @@ module.exports = {
     agregarProducto,
     eliminarProducto,
     editarProducto,
-    activarProducto
+    activarProducto,
+    obtenerProducto
 };
 

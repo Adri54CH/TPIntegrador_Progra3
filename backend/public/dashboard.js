@@ -1,64 +1,12 @@
+// Redireccion a una nueva vista 
+const botonAgregar = document.getElementById("agregar-producto").addEventListener("click",()=>{
 
-// Logica para agregar un producto 
-document.querySelector("form").addEventListener("submit",(e)=>{
-    e.preventDefault();
-    
-    const nombre  = document.getElementById("input-nombre").value;
-    const categoria  = document.getElementById("input-categoria").value;
-    const precio = document.getElementById("input-precio").value;
-    const urlImagen = document.getElementById("input-url").value;
+    window.location.href = "/altaProducto.html";
 
-    fetch("/agregarProducto",{
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({
-            nombre,
-            categoria,
-            precio,
-            urlImagen
-        })
-    }).then(res => res.json())
-    .then(data => {
-        console.log(data);
-
-        if(data.ok){
-
-                
-                // Limpio los inputs 
-
-                document.getElementById("input-nombre").value = "";
-                document.getElementById("input-categoria").value = ""
-                document.getElementById("input-precio").value = ""
-                document.getElementById("input-url").value = ""
-
-                // Cierro el modal
-
-                document.getElementById("modal").style.display = "none";
-
-                
-                //renderizo los productos   
-                renderizarProductos();
-
-            
-        }
-    })
-    .catch(error=>console.error(error))
-
-})
-
-// Logica para mostrar el modal de agregado de producto
-document.getElementById("agregar-producto").addEventListener("click",()=>{
-    
-    document.getElementById("modal").style.display = "flex";
     
 
 })
 
-// Logica para cerrar el modal de agreado de producto
-document.getElementById("cerrar-modal").addEventListener("click",()=>{
-
-    document.getElementById("modal").style.display = "none";
-})
 
 
 const modalEliminacion = document.querySelector(".modal-eliminacion");
@@ -120,84 +68,21 @@ document.querySelector(".cancelar-activacion").addEventListener("click",()=>{
 
 
 })
-const modalEdicion = document.querySelector(".modal-edicion");
 
 let idProductoEditar = null;
 
 //Logica para mostrar el modal al presionar 'editar' en un producto
 document.addEventListener("click",(e)=>{
     if(e.target.classList.contains("btn-editar")){
-    
-        const card = e.target.closest(".card");
 
+        const card = e.target.closest(".card");
+        // Obtengo la id del producto a editar 
         idProductoEditar = card.querySelector(".btn-eliminar").dataset.id;
 
-        const nombreProductoEditar = card.querySelector(".nombre-producto").textContent;
-        const precioProductoEditar = card.querySelector(".precio-producto").textContent;
-        const urlProductoEditar = card.querySelector(".img-producto").src;
-        const categoriaProductoEditar = card.querySelector(".categoria-producto").textContent;
-        
+        // Hago un redireccionamiento 'peticion GET implicita ' usando queryParameter 
 
-        // console.log(nombreProductoEditar);
-
-        // ("input-nuevo-nombre").value = nuevoNombre;
-    // modalEdicion.getElementById("input-nuevo-precio").value = nuevoPrecio;
-    // modalEdicion.getElementById("input-nueva-url").value = nuevaUrl;
-    // modalEdicion.getElementById("input-nueva-categoria").value = nuevaCategoria;
-
-        //Se muestra un modal para la carga de nuevos datos
-        modalEdicion.style.display = "flex";
-
-        // Se cargan los datos al modal para su posterior modificacion 
-
-        cargarInputsFormulario(nombreProductoEditar,precioProductoEditar,urlProductoEditar,categoriaProductoEditar);
-
-
+        window.location.href = `/editarProducto.html?id=${idProductoEditar}`;
     }
-})
-
-// Logica para editar un producto cuando se envia el formulario de nuevos datos
-document.querySelector(".form-edicion").addEventListener("submit",(e)=>
-{
-    e.preventDefault();
-
-    const nuevoNombre = document.getElementById("input-nuevo-nombre").value;
-    const nuevoPrecio = document.getElementById("input-nuevo-precio").value;
-    const nuevaUrl = document.getElementById("input-nueva-url").value;
-    const nuevaCategoria = document.getElementById("input-nueva-categoria").value;
-
-    const productoActualizado = {nuevoNombre,nuevoPrecio,nuevaUrl,nuevaCategoria};
-
-    
-    // Peticion fetch para hacer los cambios 
-
-    fetch(`/editarProducto/${idProductoEditar}`,{
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-            
-        },
-        body: JSON.stringify(productoActualizado)
-    }).then(()=>{
-        
-        // Se cierra el modal 
-
-        modalEdicion.style.display = "none";    
-
-        //Renderiza los productos 
-        renderizarProductos();  
-
-    })
-    .catch(error =>{
-        console.log(error);
-    })
-
-})
-
-// Logica para cerrar el modal de edicion
-document.querySelector(".cerrar-editar").addEventListener("click",()=>{ 
-
-    modalEdicion.style.display = "none";
 })
 
 
@@ -240,7 +125,7 @@ document.querySelector(".btn-confirmar-activacion").addEventListener("click",()=
 })
 function activarProducto(idProducto){
 
-    fetch(`/activarProducto/${idProducto}`,{
+    fetch(`/api/activarProducto/${idProducto}`,{
         method: "PUT",
 
     }).then(res => res.json())
@@ -309,7 +194,7 @@ async function renderizarProductos(){
 //Funcion para obtener lista de productos 
 function obtenerProductos(){
     
-    return fetch("/productos")
+    return fetch("/api/productos")
     .then(res => res.json())
     .then(data => {
         
@@ -332,13 +217,13 @@ function eliminarProducto(idProducto){
     
 
     // Peticion delete para eliminar un producto
-    return fetch(`/eliminarProducto/${idProducto}`,{
+    return fetch(`/api/eliminarProducto/${idProducto}`,{
         method: "DELETE"
     }).then(res => res.json())
     .then(res => console.log(res))
 
 
- 
+
 
 }
 
@@ -349,7 +234,7 @@ function eliminarProducto(idProducto){
 function editarProducto(idProducto){
 
 
-    fetch(`/editarProducto/${idProducto}`,{
+    fetch(`/api/editarProducto/${idProducto}`,{
         method: "PUT"
     }).then(res => res.json())
     .then(res => console.log(res));
@@ -359,15 +244,4 @@ function editarProducto(idProducto){
 
 }
 
-//Funcion para cargar datos al formulario de edicion de un producto
-
-function cargarInputsFormulario(nombreProducto,precioProducto,urlProducto,categoriaProducto){
-
-    modalEdicion.querySelector("#input-nuevo-nombre").value = nombreProducto;
-    modalEdicion.querySelector("#input-nuevo-precio").value = precioProducto;
-    modalEdicion.querySelector("#input-nueva-url").value = urlProducto;
-    modalEdicion.querySelector("#input-nueva-categoria").value = categoriaProducto;
-
-
-}
 

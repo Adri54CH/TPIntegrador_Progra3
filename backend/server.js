@@ -33,11 +33,11 @@ app.use("/login",routerAutenticacion)
 // Indico a express que se tiene que usar EJS como motor de plantillas .
 app.set("view engine","ejs");
 // Indico la nueva ubicacion del directorio views 
-// app.set("views",path.join(__dirname,"views"));
+app.set("views",path.join(__dirname,"views"));
 
 
 //Defino ruta raiz de la web 
-// app.use(express.static(path.join(__dirname,"public")));
+app.use(express.static(path.join(__dirname,"public")));
 
 
 

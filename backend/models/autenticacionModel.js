@@ -2,7 +2,7 @@
 const pool = require("../config/db");
 
 
-const validarLogin = async()=>{
+const validarLogin = async(correo)=>{
 
     const [filas] = await pool.query("SELECT * FROM usuarios WHERE correo = ?",[correo]);
 
