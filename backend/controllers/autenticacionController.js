@@ -2,22 +2,24 @@ const autenticacionModel = require("../models/autenticacionModel");
 
 const path = require("path");
 
-const mostrarLogin = async(req,res)=>{
+const mostrarLogin = (req,res)=>{
 
     res.sendFile(path.join(__dirname,"../../frontend/loginAdministrador.html")); 
 
 
 }
 
-const mostrarCssLogin = async(req,res)=>{
+const mostrarCssLogin = (req,res)=>{
 
-    res.sendFile(path.join(__dirname,"../../frontend/loginAdministrador.css"));
+
+    res.sendFile(path.join(__dirname,"../../frontend/css/loginAdministrador.css"));
+
 
 }
 
-const mostrarJsLogin = async(req,res)=>{
+const mostrarJsLogin = (req,res)=>{
 
-    res.sendFile(path.join(__dirname,"../../frontend/loginAdministrador.js"));
+    res.sendFile(path.join(__dirname,"../../frontend/js/loginAdministrador.js"));
 
 }
 

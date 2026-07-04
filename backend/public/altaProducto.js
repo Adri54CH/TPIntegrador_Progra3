@@ -4,11 +4,16 @@ document.querySelector("form").addEventListener("submit",(e)=>{
     
     e.preventDefault();
 
+    
+
             
     const nombre  = document.getElementById("input-nombre").value;
     const categoria  = document.getElementById("input-categoria").value;
     const precio = document.getElementById("input-precio").value;
     const urlImagen = document.getElementById("input-url").value;
+
+
+
 
     fetch("/api/agregarProducto",{
         method: "POST",
@@ -19,34 +24,38 @@ document.querySelector("form").addEventListener("submit",(e)=>{
             precio,
             urlImagen
         })
-    }).then(res => res.json())
-    .then(data => {
-        console.log(data);
+    }).then(res => {
+        
+        
+        if(!res.ok){
+            alert("el producto ya existe");
+            throw new Error("error");
 
-        if(data.ok){
-
-                
-                // Limpio los inputs 
-
-                document.getElementById("input-nombre").value = "";
-                document.getElementById("input-categoria").value = ""
-                document.getElementById("input-precio").value = ""
-                document.getElementById("input-url").value = ""
-
-
-                // cambio la pagina 'altaProducto'
-
-                window.location.href = "/dashboard";
-
-
-            
         }
-    })
-    .catch(error=>console.error(error))
+        else{
+    
+            return res.json();
+            
+        }})
+        .then(() => {
+
+            // Limpio los inputs 
+            
+            document.getElementById("input-nombre").value = "";
+            document.getElementById("input-categoria").value = ""
+            document.getElementById("input-precio").value = ""
+            document.getElementById("input-url").value = ""
+
+
+            // cambio la pagina 'altaProducto'
+
+            window.location.href = "/dashboard";
+        })
+        .catch(error=>console.error(error))
 
 })
 
-// Logica para cerrar el form 
+// Logica para cerrar el formulario 
 document.getElementById("cerrar-modal").addEventListener("click",()=>{
 
     // cambio de pagina 

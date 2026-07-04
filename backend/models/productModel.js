@@ -116,6 +116,21 @@ const obtenerProducto = async(id)=>{
     }
 } 
 
+const comprobarProductoPorNombre = async(nombre)=>{
+
+    try{
+        
+        const [rows] = await pool.query("SELECT * FROM productos WHERE nombre=?",[nombre]);
+        return rows;
+    }
+    catch(error){
+        
+        console.log(error);
+
+    }
+
+}
+
 
 module.exports = {
     obtenerTodos,
@@ -123,6 +138,7 @@ module.exports = {
     eliminarProducto,
     editarProducto,
     activarProducto,
-    obtenerProducto
+    obtenerProducto,
+    comprobarProductoPorNombre
 };
 

@@ -18,16 +18,29 @@ const obtenerProductos = async(req,res)=>{
 }
 
 
+
+
 const agregarProducto = async(req,res)=>{
     
 
     const {nombre,categoria,precio,urlImagen} = req.body;
 
 
+    // Valido si el producto existe 
 
+    const resultado = await productModel.comprobarProductoPorNombre(nombre);
+
+    // Existe el producto
+    if(resultado.length > 0){
+
+        // return res.json({ok:false});
+        return res.status(400).json({ok:false});
+
+    }
+    
     await productModel.agregarProducto(nombre,categoria,precio,urlImagen);
 
-    res.json({ok:true});
+    return res.json({ok:true});
 
     
 
