@@ -64,7 +64,7 @@ const eliminarProducto = async(id)=>{
     }
 }
 
-const editarProducto = async()=>{
+const editarProducto = async(id, nuevoNombre, nuevoPrecioLimpio, nuevaUrl, nuevoCategoriaLimpio)=>{
 
 
     try{
