@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tu Ticket - GG Store</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <main class="ticket-container">
+        <header>
+            <h1></h1>
+            <p>Comprobante de Compra</p>
+        </header>
+
+        <section id="detalle-compra">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-productos">
+                    <!-- Aquí el JS inyectará los productos luego -->
+                    <tr><td>Ejemplo Producto</td><td>$1000</td></tr>
+                </tbody>
+            </table>
+            <div class="total">
+                <strong>Total: $1000</strong>
+            </div>
+        </section>
+
+        <footer>
+            <button onclick="window.print()">Imprimir Ticket</button>
+            <a href="productos.html">Volver al inicio</a>
+        </footer>
+    </main>
+</body>
+</html>
