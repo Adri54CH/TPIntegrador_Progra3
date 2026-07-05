@@ -1,4 +1,7 @@
 
+/* -------------------------------------------
+    ESTILOS GLOBALES Y BASE
+    ------------------------------------------ */
 * {
     margin: 0;
     padding: 0;
@@ -11,16 +14,51 @@ body {
     padding: 20px;
 }
 
+/* --------------------------------------------
+    BARRA DE NAVEGACIÓN (CINTA AZUL)
+    --------------------------------------------*/
+.navbar-tech {
+    background-color: #007bff; 
+    color: white;              
+    padding: 15px 30px;        
+    display: flex;             
+    justify-content: space-between; 
+    align-items: center;       
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+}
+
+.navbar-tech h1 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+#ver-carrito {
+    background-color: white;   
+    color: #007bff;            
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none; /* Por si usás etiqueta <a> */
+}
+
+#ver-carrito:hover {
+    background-color: #f0f0f0; 
+}
+
+/* --------------------------------------------
+   3. CATÁLOGO DE PRODUCTOS (TIENDA)
+   -------------------------------------------- */
 .contenedor-grilla {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
     gap: 20px;
     padding: 20px;
-    max-width: 1000px; /* Esto limita el ancho del contenedor */
-    margin: 0 auto; /* Centra toda la grilla en la pantalla */
+    max-width: 1000px; 
+    margin: 0 auto; 
 }
 
-/* Estilo moderno para las tarjetas */
 .tarjeta-producto {
     border: 1px solid #ddd;
     border-radius: 12px;
@@ -28,13 +66,13 @@ body {
     text-align: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: transform 0.2s;
+    background-color: white;
 }
 
 .tarjeta-producto:hover {
-    transform: scale(1.05); /*efecto lindo cuando pasás el mouse */
+    transform: scale(1.05); 
 }
 
-/* Estilo para el botón */
 .btn-agregar {
     background-color: #007bff;
     color: white;
@@ -48,34 +86,91 @@ body {
     background-color: rgb(175, 168, 168); 
 }
 
-/* La cinta azul completa */
-.navbar-tech {
-    background-color: #007bff; 
-    color: white;              
-    padding: 15px 30px;        /* Espacio dentro de la cinta */
-    display: flex;             
-    justify-content: space-between; /* Título a la izquierda, botón a la derecha */
-    align-items: center;       /* Alineación vertical */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Una sombra suave para profundidad */
+/* --------------------------------------------
+   4. BANDEJA DEL CARRITO DE COMPRAS
+   -------------------------------------------- */
+.carrito-page {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
 }
 
-/* Estilo para el texto */
-.navbar-tech h1 {
-    font-size: 1.5rem;
+.bandeja-carrito {
+    background-color: white;
+    width: 100%;
+    max-width: 900px; /* Ancho ideal intermedio */
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); 
+}
+
+.bandeja-carrito h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #222;
+}
+
+.tabla-carrito {
+    width: 100%;
+    border-collapse: collapse; 
+    margin-bottom: 25px;
+}
+
+.tabla-carrito th, 
+.tabla-carrito td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #eaeaea; 
+}
+
+.tabla-carrito th {
+    background-color: #f8f9fa;
+    color: #666;
+    font-weight: 600;
+}
+
+/* El mensaje cuando la bandeja no tiene productos */
+.carrito-vacio-msg {
+    text-align: center !important; 
+    color: #888;
+    font-size: 1.1rem;
+    padding: 60px 0 !important; /* El espacio vertical que querías */
+    font-style: italic;
+}
+
+.pie-carrito {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #f0f0f0;
+    padding-top: 20px;
+}
+
+.pie-carrito h3 {
     margin: 0;
+    color: #333;
 }
 
-/* Mejora el botón para que combine con la cinta */
-#ver-carrito {
-    background-color: white;   /* Botón blanco sobre azul */
-    color: #007bff;            /* Letras azules en el botón */
+.btn-finalizar {
+    background-color: #007bff;
+    color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
+    padding: 14px 28px;
+    border-radius: 6px;
     font-weight: bold;
+    font-size: 1rem;
     cursor: pointer;
 }
 
-#ver-carrito:hover {
-    background-color: #f0f0f0; /* Un gris clarito al pasar el mouse */
+.btn-finalizar:hover {
+    background-color: #0056b3;
+}
+
+.btn-eliminar {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
 }

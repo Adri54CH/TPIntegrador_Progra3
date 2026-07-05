@@ -1,84 +1,91 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
-*{
-    padding: 0;
+/* Contenedor principal que centra el login vertical y horizontalmente */
+* {
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;    
-    color: black;
+    font-family: sans-serif;
 }
 
-.login-administrador h1{
-    font-size: 30px;
-    font-weight: 500;
-
-}
-.login-administrador{
-    
-    
-    display: flex;
-    gap: 20px;
-    flex-direction: column;
-    /* padding: 200px 40px; */
-    border-radius: 10px;
-    border: 1px solid black;
-    background-color: rgb(247, 247, 247);
-    height: 300px;
-    width: 500px;
-    align-items: center;
-    justify-content: center;
-}
-
-.form-datos{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    /* gap: 100px; */
-    /* padding: 60px; */
-    /* background-color: pink; */
-}
-
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+/* Fondo similar a la tienda */
+body {
     background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Centra el contenido verticalmente en toda la pantalla */
 }
 
-label{
-    font-size: 20px;
-    font-weight: 500;
-}
-input{
-    width: 250px;
-    height: 30px;
-    border-radius: 5px;
-    border: 1px solid black;
-    color: black;
-    font-size: 15px;
-    padding: 0px 2px;
-    /* border: none; */
-    /* background-color: pink; */
+/* El contenedor principal de tu login (<div class="login-administrador">) */
+.login-administrador {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Evita que se estire a los costados */
+    text-align: center;
 }
 
-button{
-    margin-top: 20px;
-    /* padding: 10px 50px;
-     */
-    width: 100px;
-    height: 30px;
-    font-size: 15px;
+/* El título principal */
+.login-administrador h1 {
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+}
+
+/* El formulario (<form class="form-datos">) */
+.form-datos {
+    display: flex;
+    flex-direction: column; /* Acomoda los elementos uno abajo del otro */
+    text-align: left; /* Alinea los textos de las etiquetas a la izquierda */
+}
+
+/* Las etiquetas de texto (label) */
+.form-datos label {
+    display: block;
+    margin-bottom: 6px;
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Estilo común para tus inputs (.correo-login y .contrasena-login) */
+.correo-login,
+.contrasena-login {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px; /* Separa cada sección */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+/* Efecto foco al hacer clic para escribir */
+.correo-login:focus,
+.contrasena-login:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+/* El botón de enviar (.btn-enviar) con la estética azul de Tech Store */
+.btn-enviar {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
-    background-color: rgb(187, 193, 197);
-    color: black;
-    border: 1px solid black;
-    border-radius: 15px;
-    transition: 0.6s;
+    transition: background-color 0.2s;
+    margin-top: 10px;
 }
 
-button:hover{
-    
-    background-color: rgb(152, 167, 167);
-    
+.btn-enviar:hover {
+    background-color: #0056b3; /* Azul un toque más oscuro al pasar el mouse */
 }
+
