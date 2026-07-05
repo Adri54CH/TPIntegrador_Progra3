@@ -2,6 +2,13 @@ const autenticacionModel = require("../models/autenticacionModel");
 
 const path = require("path");
 
+const mostrarLoginCliente = (req,res)=>{
+    
+    res.sendFile(path.join(__dirname,"../../frontend/loginCliente.html"));
+
+
+}
+
 const mostrarLogin = (req,res)=>{
 
     res.sendFile(path.join(__dirname,"../../frontend/loginAdministrador.html")); 
@@ -52,12 +59,21 @@ const validarLogin = async(req,res)=>{
 }
 
 
+const mostrarCssLoginCliente = (req,res)=>{
+    
+    res.sendFile(path.join(__dirname,"../../frontend/css/loginCliente.css"));
+}
 
+const mostrarJsLoginCliente = (req,res)=>{
+    res.sendFile(path.join(__dirname,"../../frontend/js/loginCliente.js"));
 
-
+}
 module.exports = {
+    mostrarLoginCliente,
     mostrarLogin,
     mostrarCssLogin,
     mostrarJsLogin,
-    validarLogin
+    validarLogin,
+    mostrarCssLoginCliente,
+    mostrarJsLoginCliente
 }

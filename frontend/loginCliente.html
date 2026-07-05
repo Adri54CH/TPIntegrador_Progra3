@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Cliente</title>
+    <link rel="stylesheet" href="/login/loginclientecss">
+
+</head>
+<body>
+
+    <main class="login-container">
+
+        <h1>¡Bienvenido!</h1>
+
+    
+
+        <form action="/productos" method="POST">
+
+            <div class="input-group">
+                <label for="nombre">Nombre</label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    minlength="2"
+                    maxlength="30"
+                    required
+                    autocomplete="off"
+                >
+            </div>
+
+            <button type="submit">
+                Ingresar
+            </button>
+
+        </form>
+
+        
+
+    </main>
+
+    
+    <script src="/login/loginclientejs"></script>
+</body>
+</html>

@@ -7,13 +7,24 @@ const autenticacionController = require("../controllers/autenticacionController"
 
 
 
-autenticacionRouter.get("/",autenticacionController.mostrarLogin);
+autenticacionRouter.get("/",autenticacionController.mostrarLoginCliente);
+
+autenticacionRouter.get("/admin",autenticacionController.mostrarLogin);
+
+autenticacionRouter.get("/loginclientecss",autenticacionController.mostrarCssLoginCliente);
+
+autenticacionRouter.get("/loginclientejs",autenticacionController.mostrarJsLoginCliente);
 
 autenticacionRouter.get("/logincss",autenticacionController.mostrarCssLogin);
 
 autenticacionRouter.get("/loginjs",autenticacionController.mostrarJsLogin);
 
 autenticacionRouter.post("/validarLogin",autenticacionController.validarLogin);
+
+
+
+
+
 
 
 
