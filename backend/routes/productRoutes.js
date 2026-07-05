@@ -1,32 +1,12 @@
 const express = require("express");
 
 
-const router = express.Router();
+const productRouter = express.Router();
 
 const productController = require("../controllers/productController");
 
-// Endpoint para mostrar los productos 
-router.get("/productos",productController.obtenerProductos);
 
-// Endpoint para agregar un producto
-router.post("/agregarProducto",productController.agregarProducto);
+productRouter.get("/",productController.mostrarProductos);
 
-// Endpoint para eliminar un producto
-router.delete("/eliminarProducto/:id",productController.eliminarProducto);
-
-//Endpoint para editar un producto 
-
-router.put("/editarProducto/:id",productController.editarProducto);
-
-// Endpoint para dar de alta un producto 
-
-router.put("/activarProducto/:idProducto",productController.activarProducto);
-
-// Endpoint para obtener un producto por su ID
-
-router.get("/producto/:id",productController.obtenerProducto);
-
-
-
-module.exports = router;
+module.exports = productRouter;
 
