@@ -155,8 +155,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             localStorage.removeItem("nombreUsuario");
 
+            
+
             //Se redirecciona a la vista principal  
-            window.location.href = "/ticket";
+            window.location.href = `/ticket?id=${data.idVenta}`;
+            
         });
     }
 

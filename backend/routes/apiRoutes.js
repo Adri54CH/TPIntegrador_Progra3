@@ -30,6 +30,10 @@ router.get("/producto/:id",apiController.obtenerProducto);
 
 router.post("/ventas",apiController.registrarVenta);
 
+//Endpoint para obtener una venta por id 
+
+router.get("/ventas/:id",apiController.mostrarVenta);
+
 
 module.exports = router;
 

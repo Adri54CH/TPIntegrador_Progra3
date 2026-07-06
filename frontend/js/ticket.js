@@ -1,8 +1,19 @@
-document.addEventListener("DOMContentLoaded", () => { 
-    //  Datos del localStorage
-    const cliente = localStorage.getItem("nombreUsuario") || "Cliente";
-    const productosComprados = JSON.parse(localStorage.getItem("carrito")) || [];
+document.addEventListener("DOMContentLoaded", async() => { 
 
+
+    // Leo la id de la url 
+    const params = new URLSearchParams(window.location.search);
+    const idVenta = params.get("id");
+
+    // Peticion para obtener la venta con la id
+    const res = await fetch(`/api/ventas/${idVenta}`);
+
+    const venta = await res.json();
+
+    // Datos de la venta para armar el ticket 
+    // console.log(venta);    
+
+    const productosComprados = venta.resultado.productos;
 
     const contenedorCliente = document.getElementById("cliente-ticket");
     const contenedorLista = document.getElementById("lista-productos");
@@ -10,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Mostramos el nombre del cliente si agregaste el span
     if (contenedorCliente) {
-        contenedorCliente.innerText = cliente;
+        contenedorCliente.innerText = venta.resultado.cliente_nombre;
     }
 
     // Si por alguna razón el carrito está vacío, avisamos
@@ -26,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     productosComprados.forEach(item => {
         const cantidad = item.cantidad || 1;
-        const subtotal = item.precio * cantidad;
+        const subtotal = item.precio_unitario * cantidad;
         totalGeneral += subtotal;
 
         filasHTML += `

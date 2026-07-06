@@ -125,6 +125,22 @@ const registrarVenta = async(req,res)=>{
 
 }
 
+const mostrarVenta = async(req,res)=>{
+
+    const id = req.params.id;
+
+    const resultado = await apiModel.mostrarVenta(id);
+
+    if(!resultado){
+        
+        return res.status(400).json({mensaje:"Venta no encontrada"})
+
+    }
+    
+    // Respondo con la informacion de la venta 
+    res.json({resultado});
+}
+
 
 module.exports = {
     obtenerProductos,
@@ -133,6 +149,7 @@ module.exports = {
     editarProducto,
     activarProducto,
     obtenerProducto,
-    registrarVenta
+    registrarVenta,
+    mostrarVenta
 };
 

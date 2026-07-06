@@ -12,7 +12,7 @@ const form = document.querySelector("form").addEventListener("submit",(e)=>{
     
     // Redirecciono a la vista de productos 
 
-    window.location.href = "productos.html";
+    window.location.href = "/productos";
 
     
 

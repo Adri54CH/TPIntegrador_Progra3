@@ -163,6 +163,23 @@ const registrarVenta = async(total,cliente,carrito)=>{
     }
 }
 
+const mostrarVenta = async(id)=>{
+
+    //Obtengo los datos de la venta 
+    const [venta] = await pool.query("SELECT * FROM ventas WHERE id=?",[id]);
+    
+    //Obtengo los productos de la venta 
+    const [productos] = await pool.query("SELECT p.nombre,dv.cantidad,dv.precio_unitario FROM venta_productos dv JOIN productos p ON p.id = dv.producto_id WHERE dv.venta_id = ?",[id]);
+
+    // Retorno la venta y los productos 
+    return{
+        ...venta[0],
+        productos
+    }
+
+
+}
+
 
 module.exports = {
     obtenerTodos,
@@ -172,6 +189,7 @@ module.exports = {
     activarProducto,
     obtenerProducto,
     comprobarProductoPorNombre,
-    registrarVenta
+    registrarVenta,
+    mostrarVenta
 };
 
