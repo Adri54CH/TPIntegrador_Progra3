@@ -128,9 +128,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+
             //Obtengo el nombre del cliente 
 
-            const nombreCliente = localStorage.getItem("cliente");
+            const nombreCliente = localStorage.getItem("nombreUsuario");
             
             const respuesta = await fetch("/api/ventas",{
                 method:"POST",
@@ -138,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Content-Type":"application/json"
                 },
                 body:JSON.stringify({
-                    cliente,
+                    nombreCliente,
                     carrito
                     
                 })

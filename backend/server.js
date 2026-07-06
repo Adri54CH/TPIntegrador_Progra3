@@ -42,8 +42,6 @@ app.use("/carrito",routerCarrito);
 app.use("/ticket",routerTicket);
 
 
-//Grupo de rutas para el carritos
-// app.use("/carrito");
 
 app.set("view engine","ejs");
 

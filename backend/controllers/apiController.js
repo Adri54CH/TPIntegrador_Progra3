@@ -107,8 +107,7 @@ const obtenerProducto = async(req,res)=>{
 
 const registrarVenta = async(req,res)=>{
 
-    const {cliente,carrito}=req.body;
-
+    const {nombreCliente,carrito}=req.body;
     let total = 0;
 
     //Calculo el total de la venta 
@@ -118,7 +117,7 @@ const registrarVenta = async(req,res)=>{
 
     //Inserto registro en tabla ventas
     
-    const idVenta = await apiModel.registrarVenta(total,cliente);
+    const idVenta = await apiModel.registrarVenta(total,nombreCliente,carrito);
 
     res.json({ok:true,idVenta,total});
 
