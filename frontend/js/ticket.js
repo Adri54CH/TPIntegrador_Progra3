@@ -1,5 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-    alert("omdfomdfom"); 
+document.addEventListener("DOMContentLoaded", () => { 
     //  Datos del localStorage
     const cliente = localStorage.getItem("nombreUsuario") || "Cliente";
     const productosComprados = JSON.parse(localStorage.getItem("carrito")) || [];

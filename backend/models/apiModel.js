@@ -130,6 +130,36 @@ const comprobarProductoPorNombre = async(nombre)=>{
 
 }
 
+const registrarVenta = async(total,cliente)=>{
+    
+    try{
+
+        const [resultadoVenta] = await pool.query("INSERT INTO ventas (cliente_nombre,total,fecha) VALUES(?,?,NOW()",[cliente,total]);
+
+        //Obtengo la id de la venta creada .
+        const ventaId = resultadoVenta.insertId;
+
+        for(const item of carrito){
+            
+            await pool.query("INSERT INTO detalle_venta (venta_id,producto_id,cantidad,precio_unitario) VALUES (?,?,?,?",[
+                ventaId,
+                item.nombre,
+                item.cantidad,
+                item.precio
+            ]);
+        }
+
+        return ventaId; 
+
+        
+    }
+    catch(error){
+
+        console.log(error);
+
+    }
+}
+
 
 module.exports = {
     obtenerTodos,
@@ -138,6 +168,7 @@ module.exports = {
     editarProducto,
     activarProducto,
     obtenerProducto,
-    comprobarProductoPorNombre
+    comprobarProductoPorNombre,
+    registrarVenta
 };
 

@@ -1,10 +1,10 @@
-const productModel = require("../models/productModel");
+const apiModel = require("../models/apiModel");
 
 const obtenerProductos = async(req,res)=>{
     
     try{
         console.log("obtenermos los productos en los controladores")
-        const productos = await productModel.obtenerTodos(); 
+        const productos = await apiModel.obtenerTodos(); 
 
 
         res.json({ok:true,productos});
@@ -28,7 +28,7 @@ const agregarProducto = async(req,res)=>{
 
     // Valido si el producto existe 
 
-    const resultado = await productModel.comprobarProductoPorNombre(nombre);
+    const resultado = await apiModel.comprobarProductoPorNombre(nombre);
 
     // Existe el producto
     if(resultado.length > 0){
@@ -38,7 +38,7 @@ const agregarProducto = async(req,res)=>{
 
     }
     
-    await productModel.agregarProducto(nombre,categoria,precio,urlImagen);
+    await apiModel.agregarProducto(nombre,categoria,precio,urlImagen);
 
     return res.json({ok:true});
 
@@ -53,7 +53,7 @@ const eliminarProducto = async(req,res)=>{
 
     // Se elimina el producto de la base de datos (baja logica)
 
-    await productModel.eliminarProducto(id);
+    await apiModel.eliminarProducto(id);
 
     // todo salio bien 
     res.json({success:true});
@@ -72,7 +72,7 @@ const editarProducto = async(req,res)=>{
     const nuevoCategoriaLimpio = nuevaCategoria.replace("Categoría: ", "");
 
 
-    await productModel.editarProducto();
+    await apiModel.editarProducto();
 
     res.json({mensaje:"Se edito el producto con exito"});
 
@@ -85,7 +85,7 @@ const activarProducto = async(req,res)=>{
     const id = req.params.idProducto;
 
 
-    await productModel.activarProducto(id);
+    await apiModel.activarProducto(id);
 
     res.json({mensaje:"Producto activado"});
 
@@ -96,7 +96,7 @@ const obtenerProducto = async(req,res)=>{
 
     const id = req.params.id;
 
-    const producto = await productModel.obtenerProducto(id);
+    const producto = await apiModel.obtenerProducto(id);
 
 
     res.json({mensaje:"Producto obtenido con exito",producto});
@@ -105,7 +105,26 @@ const obtenerProducto = async(req,res)=>{
 
 }
 
+const registrarVenta = async(req,res)=>{
 
+    const {cliente,carrito}=req.body;
+
+    let total = 0;
+
+    //Calculo el total de la venta 
+    carrito.forEach(item=>{
+        total+=item.precio * item.cantidad;
+    })
+
+    //Inserto registro en tabla ventas
+    
+    const idVenta = await apiModel.registrarVenta(total,cliente);
+
+    res.json({ok:true,idVenta,total});
+
+    
+
+}
 
 
 module.exports = {
@@ -114,6 +133,7 @@ module.exports = {
     eliminarProducto,
     editarProducto,
     activarProducto,
-    obtenerProducto
+    obtenerProducto,
+    registrarVenta
 };
 

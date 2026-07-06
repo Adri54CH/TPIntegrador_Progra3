@@ -13,13 +13,14 @@ const mostrarCssTicket = (req,res)=>{
 
 }
 
-// const mostrarJsTicket = (req,res)=>{
+const mostrarJsTicket = (req,res)=>{
 
-//     // res.sendFile(path.join(__dirname,"../../frontend/js/"))
-// }
+    res.sendFile(path.join(__dirname,"../../frontend/js/ticket.js"))
+}
 
 
 module.exports = {
     mostrarTicket,
-    mostrarCssTicket
+    mostrarCssTicket,
+    mostrarJsTicket
 }

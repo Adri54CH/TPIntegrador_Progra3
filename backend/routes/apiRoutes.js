@@ -26,7 +26,8 @@ router.put("/activarProducto/:idProducto",apiController.activarProducto);
 
 router.get("/producto/:id",apiController.obtenerProducto);
 
+//Endpoint para registrar ventas 
 
-
+router.post("/ventas",apiController.registrarVenta);
 module.exports = router;
 

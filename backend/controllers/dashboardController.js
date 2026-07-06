@@ -1,5 +1,5 @@
 
-const productModel = require("../models/productModel");
+const productModel = require("../models/apiModel");
 
 
 const mostrarDashboard = async(req,res)=>{

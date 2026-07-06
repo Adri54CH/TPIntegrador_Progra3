@@ -122,12 +122,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Redirección al finalizar
     if (btnFinalizar) {
-        btnFinalizar.addEventListener("click", () => {
+        btnFinalizar.addEventListener("click", async() => {
             if (carrito.length === 0) {
                 alert("El carrito está vacío.");
                 return;
             }
-            window.location.href = "ticket.html";
+
+            //Obtengo el nombre del cliente 
+
+            const nombreCliente = localStorage.getItem("cliente");
+            
+            const respuesta = await fetch("/api/ventas",{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    cliente,
+                    carrito
+                    
+                })
+            });
+
+            const data = await respuesta.json();
+
+            //Se limpia el carrito
+
+            localStorage.removeItem("carrito");
+            
+            window.location.href = "/ticket";
         });
     }
 
