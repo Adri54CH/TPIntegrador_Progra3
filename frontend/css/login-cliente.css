@@ -1,77 +1,89 @@
-*{
-    padding: 0;
+/* Contenedor principal que centra el login vertical y horizontalmente */
+* {
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
 }
 
-
-body{
-
-    
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#1e293b,#0f172a);
+/* Fondo unificado con la tienda */
+body {
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
 }
 
-.login-container{
-    width:400px;
-    background:#fff;
-    border-radius:16px;
-    padding:40px 35px;
-    box-shadow:0 15px 40px rgba(0,0,0,.25);
+/* El contenedor de tu login de cliente */
+.login-container {
+    background-color: white;
+    padding: 40px 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; 
+    text-align: center;
 }
 
-h1{
-    text-align:center;
-    color:#1e293b;
-    margin-bottom:10px;
+/* El título principal */
+.login-container h1 {
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    text-align: center;
 }
 
-
-
-.informacion-form{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    margin-bottom:25px;
+/* El formulario */
+.informacion-form {
+    display: flex;
+    flex-direction: column; 
+    gap: 8px;
+    margin-bottom: 25px;
+    text-align: left; /* Alinea las etiquetas a la izquierda */
 }
 
-label{
-    font-weight:bold;
-    color:#334155;
+/* Las etiquetas de texto (label) */
+.informacion-form label {
+    display: block;
+    margin-bottom: 6px;
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: bold;
 }
 
-input{
-    padding:14px;
-    border:1px solid #cbd5e1;
-    border-radius:8px;
-    font-size:16px;
-    outline:none;
-    transition:.3s;
+/* Los inputs de texto */
+.informacion-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s ease;
 }
 
-input:focus{
-    border-color:#2563eb;
-    box-shadow:0 0 0 4px rgba(37,99,235,.15);
+/* Efecto foco al hacer clic para escribir con tu azul */
+.informacion-form input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
 }
 
-button{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:8px;
-    background:#2563eb;
-    color:#fff;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
+/* El botón con la estética azul de Tech Store */
+.informacion-form button {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
 }
 
-button:hover{
-    background:#1d4ed8;
+.informacion-form button:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
 }
-

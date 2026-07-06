@@ -4,22 +4,25 @@ let carrito = [];   // Lista global de los elementos del carrito
 
 const grilla = document.querySelector("#grilla");
 
-// llama a la ruta 
+// Llama a la ruta 
 export async function getProductos() {
     const response = await fetch(BASEURL + "productos");
     return response; 
 }
 
-// tarjetas 
+// Tarjetas 
 const card = (producto) => {
-    console.log(producto.imagen)
+    let urlImagen = producto.imagen || 'img/default.png';
+    if (producto.imagen && !producto.imagen.startsWith('http')) {
+        urlImagen = `http://localhost:3000/${producto.imagen}`; 
+    }
+
     return `
     <article class="tarjeta-producto">
-        <img src="${producto.imagen || 'img/default.png'}" alt="${producto.nombre}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;">
+        <img src="${urlImagen}" alt="${producto.nombre}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;">
         <h2>${producto.nombre}</h2>
         <p class="precio">$${producto.precio}</p>
         
-        <!-- Guardamos tu id real en el data-id -->
         <button class="btn-agregar" data-id="${producto.id}">
             Agregar al carrito
         </button>
@@ -27,7 +30,7 @@ const card = (producto) => {
     `;
 };
 
-// datos y renderizacion
+// Datos y renderizacion
 const cargarProductos = async () => {
     try {
         const respuesta = await getProductos(); 
@@ -38,15 +41,91 @@ const cargarProductos = async () => {
         productos = data.productos || data.datos || data; 
         
         if (!Array.isArray(productos) && data.payload) {
-            productos = data.payload; // Por si acaso quedó la estructura anterior
+            productos = data.payload; 
         }
 
+        // Limpiamos la grilla principal
         grilla.innerHTML = "";
-        
+
+        // Agrupamos los productos por categoría en un objeto
+        const categoriasAgrupadas = {};
+
         productos.forEach(producto => {
-            if (producto.activo === 1 || producto.activo === true) {
-                grilla.innerHTML += card(producto);
+            const cumpleActivo = producto.activo === 1 || producto.activo === true;
+            if (cumpleActivo) {
+                let cat = producto.categoria ? producto.categoria.trim() : "Otros";
+                // Guardamos la categoría normalizada para los títulos fijos
+                cat = cat.charAt(0).toUpperCase() + cat.slice(1).toLowerCase();
+
+                if (!categoriasAgrupadas[cat]) {
+                    categoriasAgrupadas[cat] = [];
+                }
+                categoriasAgrupadas[cat].push(producto);
             }
+        });
+
+        // Recorremos el objeto agrupado y creamos los bloques fijos en el HTML
+        for (const [nombreCategoria, listaDeProductos] of Object.entries(categoriasAgrupadas)) {
+            
+            const seccionCategoria = document.createElement("div");
+            seccionCategoria.className = "categoria-seccion";
+
+            seccionCategoria.setAttribute("data-nombre-cat", nombreCategoria.toLowerCase());
+            seccionCategoria.style.width = "100%";
+            seccionCategoria.style.marginBottom = "40px";
+
+            let HTMLContenido = `
+                <h2 class="titulo-categoria" style="border-bottom: 2px solid #007bff; padding-bottom: 5px; margin-bottom: 20px; text-align: left; color: #2c3e50;">
+                    ${nombreCategoria}
+                </h2>
+                <div class="productos-subgrilla" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
+            `;
+
+            listaDeProductos.forEach(producto => {
+                HTMLContenido += card(producto);
+            });
+
+            HTMLContenido += `</div>`; 
+            seccionCategoria.innerHTML = HTMLContenido;
+            grilla.appendChild(seccionCategoria);
+        }
+
+        // Botones de filtro
+        const botonesFiltro = document.querySelectorAll(".btn-filtro");
+        botonesFiltro.forEach(boton => {
+            boton.addEventListener("click", (e) => {
+                // Cambiar clases visuales (activos/inactivos) usando tus clases CSS
+                botonesFiltro.forEach(b => b.classList.remove("activo"));
+                e.target.classList.add("activo");
+
+                // Filtro seleccionado del botón ('todos', 'mouses', 'teclados', 'audio')
+                const filtroSeleccionado = e.target.getAttribute("data-categoria").toLowerCase();
+                const secciones = document.querySelectorAll(".categoria-seccion");
+
+                secciones.forEach(seccion => {
+                    const nombreCatSeccion = seccion.getAttribute("data-nombre-cat"); // 'mouse', 'teclado', 'auriculares', etc.
+                    
+                    let mostrar = false;
+
+                    if (filtroSeleccionado === "todos") {
+                        mostrar = true;
+                    } else if (filtroSeleccionado === "mouses" && nombreCatSeccion === "mouse") {
+                        mostrar = true;
+                    } else if (filtroSeleccionado === "teclados" && nombreCatSeccion === "teclado") {
+                        mostrar = true;
+                    } else if (filtroSeleccionado === "audio" && (nombreCatSeccion === "auriculares" || nombreCatSeccion === "parlantes")) {
+                        // Si presionan Audio, se muestran tanto auriculares como parlantes al mismo tiempo
+                        mostrar = true;
+                    }
+
+                    // Aplicamos el cambio visual
+                    if (mostrar) {
+                        seccion.style.display = "block";
+                    } else {
+                        seccion.style.display = "none";
+                    }
+                });
+            });
         });
 
         asignarEventosBotones();
@@ -57,7 +136,16 @@ const cargarProductos = async () => {
     }
 };
 
-// 4. carrito
+// Función global para actualizar el número del botón en el header
+const actualizarContadorCarrito = () => {
+    const linkCarrito = document.querySelector("#ver-carrito");
+    if (linkCarrito) {
+        const totalItems = carrito.reduce((acc, prod) => acc + (prod.cantidad || 1), 0);
+        linkCarrito.innerText = `Ver Carrito (${totalItems})`;
+    }
+};
+
+// Carrito eventos
 const asignarEventosBotones = () => {
     const botones = document.querySelectorAll(".btn-agregar");
     botones.forEach(boton => {
@@ -66,31 +154,30 @@ const asignarEventosBotones = () => {
             const productoOriginal = productos.find(item => item.id === idProducto);
             
             if (productoOriginal) {
-                // Buscamos si ya existe el producto dentro del carrito
                 const productoEnCarrito = carrito.find(item => item.id === idProducto);
 
                 if (productoEnCarrito) {
                     productoEnCarrito.cantidad = (productoEnCarrito.cantidad || 1) + 1;
                 } else {
-                    carrito.push({ ...productoOriginal, cantidad: 1 });
+                    carrito.push({ ...productoOriginal, quantity: 1, cantidad: 1 });
                 }
 
-                // Guardamos en el LocalStorage
                 localStorage.setItem("carrito", JSON.stringify(carrito));
-                
-                console.log("Carrito actual:", carrito);
+                actualizationContadorCarrito();
                 alert(`¡${productoOriginal.nombre} agregado con éxito!`);
             }
         });
     });
 };
-// lanzador de la pagina
+
+// Lanzador de la pagina
 const init = () => {
     const carritoGuardado = localStorage.getItem("carrito");
     if (carritoGuardado) {
         carrito = JSON.parse(carritoGuardado);
     }
     cargarProductos();
+    actualizarContadorCarrito(); 
 };
 
 init();

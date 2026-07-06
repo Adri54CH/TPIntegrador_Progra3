@@ -1,7 +1,4 @@
-
-/* -------------------------------------------
-    ESTILOS GLOBALES Y BASE
-    ------------------------------------------ */
+/* Estilos Globales */
 * {
     margin: 0;
     padding: 0;
@@ -14,9 +11,7 @@ body {
     padding: 20px;
 }
 
-/* --------------------------------------------
-    BARRA DE NAVEGACIÓN (CINTA AZUL)
-    --------------------------------------------*/
+/* Barra de navegación */
 .navbar-tech {
     background-color: #007bff; 
     color: white;              
@@ -40,16 +35,14 @@ body {
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
-    text-decoration: none; /* Por si usás etiqueta <a> */
-}
+    text-decoration: none; 
+} /* <-- ¡CORREGIDO! Acá faltaba esta llave de cierre */
 
 #ver-carrito:hover {
     background-color: #f0f0f0; 
 }
 
-/* --------------------------------------------
-   3. CATÁLOGO DE PRODUCTOS (TIENDA)
-   -------------------------------------------- */
+/* Catálogo de productos */
 .contenedor-grilla {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
@@ -73,6 +66,34 @@ body {
     transform: scale(1.05); 
 }
 
+.btn-filtro {
+    background-color: white;
+    color: #007bff;
+    border: 2px solid #007bff;
+    padding: 8px 22px;
+    border-radius: 25px; 
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    margin: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.btn-filtro:hover {
+    background-color: #007bff;
+    color: white;
+    transform: translateY(-2px); /* Efecto levante */
+    box-shadow: 0 4px 10px rgba(0,123,255,0.15);
+}
+
+/* Para resaltar el botón de la categoría que está mirando */
+.btn-filtro.activo {
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,123,255,0.2);
+}
+
 .btn-agregar {
     background-color: #007bff;
     color: white;
@@ -86,9 +107,7 @@ body {
     background-color: rgb(175, 168, 168); 
 }
 
-/* --------------------------------------------
-   4. BANDEJA DEL CARRITO DE COMPRAS
-   -------------------------------------------- */
+/* Bandeja del Carrito */
 .carrito-page {
     padding: 40px 20px;
     display: flex;
@@ -98,7 +117,7 @@ body {
 .bandeja-carrito {
     background-color: white;
     width: 100%;
-    max-width: 900px; /* Ancho ideal intermedio */
+    max-width: 900px; 
     padding: 35px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); 
@@ -134,7 +153,7 @@ body {
     text-align: center !important; 
     color: #888;
     font-size: 1.1rem;
-    padding: 60px 0 !important; /* El espacio vertical que querías */
+    padding: 60px 0 !important;
     font-style: italic;
 }
 
@@ -173,4 +192,4 @@ body {
     padding: 6px 12px;
     border-radius: 4px;
     cursor: pointer;
-}
+} 

@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Tu Ticket - Tech Store</title>
-    <link rel="stylesheet" href="/ticket.css">
+    <link rel="stylesheet" href="css/ticket.css">
 </head>
 <body>
     <main class="ticket-container">
-        <header>
-            <h1>Tech Store</h1>
-            <p>Comprobante de Compra</p>
-        </header>
+    <header>
+        <h1>Tech Store</h1>
+        <p>Comprobante de Compra</p>
+    
+
+    
+        <p><strong>Cliente:</strong> <span id="cliente-ticket"></span></p>
+    </header>
 
         <section id="detalle-compra">
             <table>
@@ -21,7 +25,8 @@
                     </tr>
                 </thead>
                 <tbody id="lista-productos">
-                    <!-- Aquí el JS inyectará los productos luego -->
+
+                
                     <tr><td>Ejemplo Producto</td><td>$</td></tr>
                 </tbody>
             </table>
@@ -35,5 +40,7 @@
             <a href="productos.html">Volver al inicio</a>
         </footer>
     </main>
+
+    <script src="js/ticket.js"></script>
 </body>
 </html>

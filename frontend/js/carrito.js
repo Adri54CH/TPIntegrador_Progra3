@@ -5,7 +5,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalSpan = document.getElementById("total-carrito");
     const btnFinalizar = document.querySelector(".btn-finalizar");
 
+    const actualizarContadorCarrito = () => {
+        const linkCarrito = document.querySelector("#ver-carrito");
+        if (linkCarrito) {
+            const totalItems = carrito.reduce((acc, prod) => acc + (prod.cantidad || 1), 0);
+            linkCarrito.innerText = `Volver al catálogo (${totalItems})`; 
+        }
+    };
+
     function renderizarCarrito() {
+        // Ejecutamos la actualización del contador del header
+        actualizarContadorCarrito();
+
         if (carrito.length === 0) {
             tbody.innerHTML = `
                 <tr id="carrito-vacio-row">

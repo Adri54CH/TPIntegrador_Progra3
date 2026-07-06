@@ -12,13 +12,16 @@
     <a href="carrito.html" id="ver-carrito" style="text-decoration: none;">Ver Carrito (0)</a>
 </header>
 
-    <main id="grilla" class="contenedor-grilla">
+    <div class="categorias-filtro" style="text-align: center; margin: 30px 0; display: flex; justify-content: center; gap: 12px;">
+        <button class="btn-filtro active" data-categoria="todos" style="padding: 10px 20px; border-radius: 20px; border: 1px solid #007bff; background: #007bff; color: white; cursor: pointer;">Todos</button>
+        <button class="btn-filtro" data-categoria="Mouses" style="padding: 10px 20px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer;">Mouses</button>
+        <button class="btn-filtro" data-categoria="Teclados" style="padding: 10px 20px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer;">Teclados</button>
+        <button class="btn-filtro" data-categoria="Audio" style="padding: 10px 20px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer;">Audio</button>
+    </div>
 
-    
-    
-
-
+    <main id="grilla" class="contenedor-grilla" style="margin-top: 20px; padding: 0 20px;">
     </main>
+
+    <script type="module" src="./js/productos.js"></script>
 </body>
-<script type="module" src="./js/productos.js"></script>
 </html>

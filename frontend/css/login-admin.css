@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
-/* Contenedor principal que centra el login vertical y horizontalmente */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -13,17 +13,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Centra el contenido verticalmente en toda la pantalla */
+    min-height: 100vh; 
 }
 
-/* El contenedor principal de tu login (<div class="login-administrador">) */
+/* El contenedor principal de tu login de admin */
 .login-administrador {
     background-color: white;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px; /* Evita que se estire a los costados */
+    max-width: 400px; 
     text-align: center;
 }
 
@@ -34,11 +34,11 @@ body {
     margin-bottom: 25px;
 }
 
-/* El formulario (<form class="form-datos">) */
+/* El formulario */
 .form-datos {
     display: flex;
-    flex-direction: column; /* Acomoda los elementos uno abajo del otro */
-    text-align: left; /* Alinea los textos de las etiquetas a la izquierda */
+    flex-direction: column; 
+    text-align: left; 
 }
 
 /* Las etiquetas de texto (label) */
@@ -50,12 +50,12 @@ body {
     font-weight: bold;
 }
 
-/* Estilo común para tus inputs (.correo-login y .contrasena-login) */
+/* Estilo común para tus inputs */
 .correo-login,
 .contrasena-login {
     width: 100%;
     padding: 12px;
-    margin-bottom: 20px; /* Separa cada sección */
+    margin-bottom: 20px; 
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 1rem;
@@ -63,14 +63,14 @@ body {
     transition: all 0.2s ease;
 }
 
-/* Efecto foco al hacer clic para escribir */
+/* Efecto foco al hacer clic */
 .correo-login:focus,
 .contrasena-login:focus {
     border-color: #007bff;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
 }
 
-/* El botón de enviar (.btn-enviar) con la estética azul de Tech Store */
+/* El botón de enviar con la estética azul de Tech Store */
 .btn-enviar {
     width: 100%;
     background-color: #007bff;
@@ -86,6 +86,5 @@ body {
 }
 
 .btn-enviar:hover {
-    background-color: #0056b3; /* Azul un toque más oscuro al pasar el mouse */
+    background-color: #0056b3; 
 }
-
