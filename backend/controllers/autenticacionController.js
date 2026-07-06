@@ -4,14 +4,14 @@ const path = require("path");
 
 const mostrarLoginCliente = (req,res)=>{
     
-    res.sendFile(path.join(__dirname,"../../frontend/loginCliente.html"));
+    res.sendFile(path.join(__dirname,"../../frontend/login-cliente.html"));
 
 
 }
 
 const mostrarLogin = (req,res)=>{
 
-    res.sendFile(path.join(__dirname,"../../frontend/loginAdministrador.html")); 
+    res.sendFile(path.join(__dirname,"../../frontend/login-admin.html")); 
 
 
 }
@@ -19,14 +19,14 @@ const mostrarLogin = (req,res)=>{
 const mostrarCssLogin = (req,res)=>{
 
 
-    res.sendFile(path.join(__dirname,"../../frontend/css/loginAdministrador.css"));
+    res.sendFile(path.join(__dirname,"../../frontend/css/login-admin.css"));
 
 
 }
 
 const mostrarJsLogin = (req,res)=>{
 
-    res.sendFile(path.join(__dirname,"../../frontend/js/loginAdministrador.js"));
+    res.sendFile(path.join(__dirname,"../../frontend/js/login-admin.js"));
 
 }
 
@@ -61,11 +61,11 @@ const validarLogin = async(req,res)=>{
 
 const mostrarCssLoginCliente = (req,res)=>{
     
-    res.sendFile(path.join(__dirname,"../../frontend/css/loginCliente.css"));
+    res.sendFile(path.join(__dirname,"../../frontend/css/login-cliente.css"));
 }
 
 const mostrarJsLoginCliente = (req,res)=>{
-    res.sendFile(path.join(__dirname,"../../frontend/js/loginCliente.js"));
+    res.sendFile(path.join(__dirname,"../../frontend/js/login-cliente.js"));
 
 }
 module.exports = {

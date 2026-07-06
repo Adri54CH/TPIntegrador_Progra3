@@ -46,5 +46,4 @@ document.addEventListener("DOMContentLoaded", () => {
         contenedorTotal.innerText = `Total: $${totalGeneral.toFixed(2)}`;
     }
 
-    localStorage.removeItem("carrito");
 });

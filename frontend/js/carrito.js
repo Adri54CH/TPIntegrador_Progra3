@@ -151,6 +151,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             localStorage.removeItem("carrito");
             
+            //Se limpia el nombre del usuario 
+
+            localStorage.removeItem("nombreUsuario");
+
+            //Se redirecciona a la vista principal  
             window.location.href = "/ticket";
         });
     }

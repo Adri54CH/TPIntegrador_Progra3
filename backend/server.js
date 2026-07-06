@@ -30,7 +30,7 @@ app.use("/api",routerApi);
 app.use("/dashboard",routerDashboard);
 
 //Grupo de rutas para el 'login'
-app.use("/login",routerAutenticacion)
+app.use("/",routerAutenticacion)
 
 //Grupo de rutas para los productos 
 app.use("/productos",routerProducto);

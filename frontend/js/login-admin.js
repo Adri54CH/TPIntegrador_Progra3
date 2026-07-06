@@ -1,7 +1,8 @@
 document.querySelector(".form-datos").addEventListener("submit",(e)=>{
 
     e.preventDefault();
-    
+
+
     const email = document.querySelector(".correo-login").value;
     const contrasena = document.querySelector(".contrasena-login").value;
 
@@ -9,7 +10,7 @@ document.querySelector(".form-datos").addEventListener("submit",(e)=>{
 
 
 
-    fetch("/login/validarLogin",{
+    fetch("/validarLogin",{
         method: "POST",
         headers: {
             "Content-Type":"application/json"

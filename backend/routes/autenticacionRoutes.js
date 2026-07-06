@@ -9,15 +9,15 @@ const autenticacionController = require("../controllers/autenticacionController"
 
 autenticacionRouter.get("/",autenticacionController.mostrarLoginCliente);
 
-autenticacionRouter.get("/admin",autenticacionController.mostrarLogin);
+autenticacionRouter.get("/clientecss",autenticacionController.mostrarCssLoginCliente);
 
-autenticacionRouter.get("/loginclientecss",autenticacionController.mostrarCssLoginCliente);
+autenticacionRouter.get("/clientejs",autenticacionController.mostrarJsLoginCliente);
 
-autenticacionRouter.get("/loginclientejs",autenticacionController.mostrarJsLoginCliente);
+autenticacionRouter.get("/login/admin",autenticacionController.mostrarLogin);
 
-autenticacionRouter.get("/logincss",autenticacionController.mostrarCssLogin);
+autenticacionRouter.get("/login/admincss",autenticacionController.mostrarCssLogin);
 
-autenticacionRouter.get("/loginjs",autenticacionController.mostrarJsLogin);
+autenticacionRouter.get("/login/adminjs",autenticacionController.mostrarJsLogin);
 
 autenticacionRouter.post("/validarLogin",autenticacionController.validarLogin);
 
