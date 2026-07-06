@@ -7,8 +7,7 @@ const obtenerTodos = async()=>{
     
     try{
         
-        // obtengo el resulado de la query
-        console.log("obtener todos los productos model")
+        // obtengo el resultado de la query
         const resultado = await pool.query("SELECT * FROM productos");
         // Me quedo con el array de productos 'productos'
         const [productos] = resultado;

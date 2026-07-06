@@ -47,7 +47,7 @@ const cargarProductos = async () => {
         // Limpiamos la grilla principal
         grilla.innerHTML = "";
 
-        // Agrupamos los productos por categoría en un objeto
+        // Agrupamos los productos por categoría en un objeto   
         const categoriasAgrupadas = {};
 
         productos.forEach(producto => {
@@ -139,13 +139,17 @@ const cargarProductos = async () => {
 // Función global para actualizar el número del botón en el header
 const actualizarContadorCarrito = () => {
     const linkCarrito = document.querySelector("#ver-carrito");
+
+
     if (linkCarrito) {
-        const totalItems = carrito.reduce((acc, prod) => acc + (prod.cantidad || 1), 0);
-        linkCarrito.innerText = `Ver Carrito (${totalItems})`;
+        // const totalItems = carrito.reduce((acc, prod) => acc + (prod.cantidad || 1), 0);
+        // linkCarrito.innerText = `Ver Carrito (${totalItems})`;
+
+        linkCarrito.innerHTML = `Ver Carrito (${carrito.length})`;
     }
 };
 
-// Carrito eventos
+    // Carrito eventos
 const asignarEventosBotones = () => {
     const botones = document.querySelectorAll(".btn-agregar");
     botones.forEach(boton => {
@@ -155,15 +159,24 @@ const asignarEventosBotones = () => {
             
             if (productoOriginal) {
                 const productoEnCarrito = carrito.find(item => item.id === idProducto);
-
+                
                 if (productoEnCarrito) {
-                    productoEnCarrito.cantidad = (productoEnCarrito.cantidad || 1) + 1;
+
+                    alert("El producto ya esta en el carrito");
+                    return;
                 } else {
-                    carrito.push({ ...productoOriginal, quantity: 1, cantidad: 1 });
+                    carrito.push(
+                        {
+                            ...productoOriginal,
+                            cantidad:1
+                        }
+                    );
                 }
 
+                // Actualizo el carrito 
                 localStorage.setItem("carrito", JSON.stringify(carrito));
-                actualizationContadorCarrito();
+                // Actualizo el contador del header 
+                actualizarContadorCarrito();
                 alert(`¡${productoOriginal.nombre} agregado con éxito!`);
             }
         });
@@ -172,11 +185,12 @@ const asignarEventosBotones = () => {
 
 // Lanzador de la pagina
 const init = () => {
+
     const carritoGuardado = localStorage.getItem("carrito");
     if (carritoGuardado) {
         carrito = JSON.parse(carritoGuardado);
     }
-    cargarProductos();
+    cargarProductos();  
     actualizarContadorCarrito(); 
 };
 

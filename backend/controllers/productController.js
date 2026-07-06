@@ -7,12 +7,25 @@ const mostrarProductos = (req,res)=>{
 
 }
 
+const mostrarCssProductos = (req,res)=>{
+
+    res.sendFile(path.join(__dirname,"../../frontend/css/styles.css"));
+
+}
+
+const mostrarJsProductos = (req,res)=>{
+
+    res.sendFile(path.join(__dirname,"../../frontend/js/productos.js"));
+
+}
 
 
 
 
 module.exports = {
 
-    mostrarProductos
+    mostrarProductos,
+    mostrarCssProductos,
+    mostrarJsProductos
 
 }

@@ -42,6 +42,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td>${producto.nombre} (x${cantidad})</td>
                 <td>$${subtotal.toFixed(2)}</td>
                 <td>
+                    <button class="btn-sumarCantidad" data-index="${index}" style="background: #ef4444; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                        +
+                    </button>
+                </td>
+                <td>
+                    <button class="btn-bajarCantidad" data-index="${index}" style="background: #ef4444; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                        -
+                    </button>
+                </td>
+                <td>
                     <button class="btn-eliminar" data-index="${index}" style="background: #ef4444; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
                         Eliminar
                     </button>
@@ -59,6 +69,49 @@ document.addEventListener("DOMContentLoaded", () => {
                 eliminarProducto(index);
             });
         });
+
+        //Enganchamos los eventos para sumar la cantidad de un producto 
+        
+        document.querySelectorAll(".btn-sumarCantidad").forEach(boton =>{
+
+            boton.addEventListener("click",(e)=>{
+                
+                const index = e.target.getAttribute("data-index");
+
+                carrito[index].cantidad += 1;
+
+                localStorage.setItem("carrito",JSON.stringify(carrito));
+                
+                renderizarCarrito();
+
+            });
+
+
+
+        })
+        
+    
+        //Enganchamos los eventos para restar la cantidad a un producto
+
+        document.querySelectorAll(".btn-bajarCantidad").forEach(boton =>{
+            
+            boton.addEventListener("click",(e)=>{
+                const index = e.target.getAttribute("data-index");
+
+                if(carrito[index].cantidad > 1){
+                    
+                    carrito[index].cantidad -= 1;
+
+                }
+                else{
+                    carrito.splice(index, 1); // lo elimina si llega a 1
+                }
+
+                localStorage.setItem("carrito",JSON.stringify(carrito));
+
+                renderizarCarrito();
+            })
+        })
     }
 
     function eliminarProducto(index) {
