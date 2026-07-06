@@ -6,8 +6,8 @@ const mysql = require("mysql2/promise");
 
 const pool = mysql.createPool({
     host: "localhost",
-    user: "admin",
-    password: "1234",
+    user: "root",
+    password: "root",
     database: "autoservicio"
 });
 

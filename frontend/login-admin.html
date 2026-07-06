@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Store - Panel Administrador</title>
+    <link rel="stylesheet" href="css/login-admin.css">
+</head>
+<body>
+
+    <div class="login-administrador">
+        <h1>Login Administrador</h1>
+        <p style="color: #666; margin-bottom: 25px; font-size: 0.9rem;">
+            Área restringida para gestión de stock y ventas
+        </p>
+        
+        <form action="" class="form-datos" id="loginAdminForm">
+            <label for="adminCorreo">Correo Electrónico</label>
+            <input 
+                type="email" 
+                id="adminCorreo" 
+                class="correo-login" 
+                placeholder="admin@techstore.com" 
+                required
+            >
+            
+            <label for="adminPassword">Contraseña</label>
+            <input 
+                type="password" 
+                id="adminPassword" 
+                class="contrasena-login" 
+                placeholder="••••••••" 
+                required
+            >
+            
+            <button class="btn-enviar" type="submit">Loguearse</button>
+        </form>
+    </div>
+    
+    <!-- Ruta relativa -->
+    <script src="js/login-admin.js"></script>
+</body>
+</html>

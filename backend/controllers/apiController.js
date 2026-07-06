@@ -3,7 +3,7 @@ const productModel = require("../models/productModel");
 const obtenerProductos = async(req,res)=>{
     
     try{
-        
+        console.log("obtenermos los productos en los controladores")
         const productos = await productModel.obtenerTodos(); 
 
 

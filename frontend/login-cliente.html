@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Store - Ingreso Cliente</title>
+    <link rel="stylesheet" href="css/login-cliente.css">
+</head>
+<body>
+
+    <main class="login-container">
+        <h1>¡Bienvenido!</h1>
+        <p style="color: #64748b; margin-bottom: 20px; text-align: center; font-size: 0.9rem;">
+            Ingresá tu nombre para empezar a comprar
+        </p>
+
+        <form action="" class="form-datos" id="loginClienteForm">
+            <div class="informacion-form">
+                <label for="nombre">Su Nombre</label>
+                <input
+                    type="text"
+                    id="nombre"
+                    class="correo-login"
+                    name="nombre"
+                    minlength="2"
+                    maxlength="30"
+                    required
+                    autocomplete="off"
+                >
+            </div>
+
+            <button class="btn-enviar" type="submit">Ingresar a la Tienda</button>
+        </form>
+    </main>
+
+    <!-- Ruta corregida relativa para evitar fallos de Live Server -->
+    <script src="js/login-cliente.js"></script>
+</body>
+</html>

@@ -8,6 +8,7 @@ const obtenerTodos = async()=>{
     try{
         
         // obtengo el resulado de la query
+        console.log("obtener todos los productos model")
         const resultado = await pool.query("SELECT * FROM productos");
         // Me quedo con el array de productos 'productos'
         const [productos] = resultado;
@@ -32,7 +33,6 @@ const agregarProducto = async(nombre,categoria,precio,urlImagen) =>{
         VALUES (?, ?, ?, ?, ?)`;
 
         
-
         await pool.query(sql,[nombre,categoria,precio,1,urlImagen]);
 
 

@@ -12,6 +12,7 @@ export async function getProductos() {
 
 // tarjetas 
 const card = (producto) => {
+    console.log(producto.imagen)
     return `
     <article class="tarjeta-producto">
         <img src="${producto.imagen || 'img/default.png'}" alt="${producto.nombre}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;">
@@ -62,22 +63,27 @@ const asignarEventosBotones = () => {
     botones.forEach(boton => {
         boton.addEventListener("click", (e) => {
             const idProducto = parseInt(e.target.getAttribute("data-id"));
+            const productoOriginal = productos.find(item => item.id === idProducto);
             
-            // Buscamos el producto usando el 'id'
-            const itemCarrito = productos.find(item => item.id === idProducto);
-            
-            if (itemCarrito) {
-                carrito.push(itemCarrito);
-                // Lo guardamos en el LocalStorage
+            if (productoOriginal) {
+                // Buscamos si ya existe el producto dentro del carrito
+                const productoEnCarrito = carrito.find(item => item.id === idProducto);
+
+                if (productoEnCarrito) {
+                    productoEnCarrito.cantidad = (productoEnCarrito.cantidad || 1) + 1;
+                } else {
+                    carrito.push({ ...productoOriginal, cantidad: 1 });
+                }
+
+                // Guardamos en el LocalStorage
                 localStorage.setItem("carrito", JSON.stringify(carrito));
                 
                 console.log("Carrito actual:", carrito);
-                alert(`¡${itemCarrito.nombre} agregado con éxito!`);
+                alert(`¡${productoOriginal.nombre} agregado con éxito!`);
             }
         });
     });
 };
-
 // lanzador de la pagina
 const init = () => {
     const carritoGuardado = localStorage.getItem("carrito");
