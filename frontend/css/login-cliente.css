@@ -87,3 +87,25 @@ body {
 .informacion-form button:hover {
     background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
 }
+
+/* Estilos para el boton 'Ingresar' */
+
+.btn-enviar{
+    
+    padding: 14px 20px;
+    border: 1px solid black;
+    background-color: rgb(23, 58, 255);
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 15px;
+    font-size: 15px;
+    color: white;
+    
+}
+
+.btn-enviar:hover{
+
+    background-color: rgb(71, 71, 224);
+    
+  
+}
