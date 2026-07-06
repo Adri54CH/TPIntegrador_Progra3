@@ -20,6 +20,8 @@ const routerDashboard = require("./routes/dashboardRoutes");
 const routerApi = require("./routes/apiRoutes");
 const routerAutenticacion = require("./routes/autenticacionRoutes");
 const routerProducto = require("./routes/productRoutes");
+const routerTicket = require("./routes/ticketRoutes");
+
 
 // Grupo de rutas para la API (json)
 app.use("/api",routerApi);
@@ -32,6 +34,10 @@ app.use("/login",routerAutenticacion)
 
 //Grupo de rutas para los productos 
 app.use("/productos",routerProducto);
+
+//Grupo de rutas para el ticket
+app.use("/ticket",routerTicket);
+
 
 //Grupo de rutas para el carritos
 // app.use("/carrito");
