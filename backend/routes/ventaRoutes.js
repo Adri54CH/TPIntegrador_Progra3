@@ -8,7 +8,7 @@ const ventaController = require("../controllers/ventaController");
 ventaRouter.post("/",ventaController.registrarVenta);
 
 //Endpoint para obtener una venta por id 
-ventaRouter.get("/ventas/:id",ventaController.mostrarVenta);
+ventaRouter.get("/:id",ventaController.mostrarVenta);
 
 
 module.exports = ventaRouter;

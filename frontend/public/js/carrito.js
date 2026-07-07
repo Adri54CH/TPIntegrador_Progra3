@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const nombreCliente = localStorage.getItem("nombreUsuario");
             
-            const respuesta = await fetch("/api/ventas",{
+            const respuesta = await fetch("/ventas",{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"

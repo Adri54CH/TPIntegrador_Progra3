@@ -1,4 +1,4 @@
-const BASEURL = "http://localhost:3000/api/";
+const BASEURL = "http://localhost:3000/";
 let productos = []; 
 let carrito = [];   
 
@@ -166,7 +166,9 @@ const asignarEventosBotones = () => {
 };
 
 const init = () => {
-    const nombreUsuario = localStorage.getItem("nombreCliente") || sessionStorage.getItem("nombreCliente");
+
+
+    const nombreUsuario = localStorage.getItem("nombreUsuario") || sessionStorage.getItem("nombreCliente");
 
     if (!nombreUsuario) {
         alert("Debes ingresar tu nombre antes de comprar.");

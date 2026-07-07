@@ -6,12 +6,12 @@ document.addEventListener("DOMContentLoaded", async() => {
     const idVenta = params.get("id");
 
     // Peticion para obtener la venta con la id
-    const res = await fetch(`/api/ventas/${idVenta}`);
+    const res = await fetch(`/ventas/${idVenta}`);
 
     const venta = await res.json();
 
     // Datos de la venta para armar el ticket 
-    // console.log(venta);    
+    // console.log(venta);     
 
     const productosComprados = venta.resultado.productos;
 
