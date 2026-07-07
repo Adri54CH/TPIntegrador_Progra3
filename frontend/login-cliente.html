@@ -4,36 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Store - Ingreso Cliente</title>
-    <link rel="stylesheet" href="/clientecss">
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <main class="login-container">
-        <h1>¡Bienvenido!</h1>
-        <p style="color: #64748b; margin-bottom: 20px; text-align: center; font-size: 0.9rem;">
-            Ingresá tu nombre para empezar a comprar
-        </p>
+    <main class="carrito-page">
+        <div class="bandeja-carrito" style="max-width: 450px; text-align: center;">
+            <h1 style="color: #f8fafc; margin-bottom: 10px;">¡Bienvenido!</h1>
+            <p style="color: #94a3b8; margin-bottom: 25px; font-size: 0.95rem;">
+                Ingresá tu nombre para empezar a comprar
+            </p>
 
-        <form action="" class="form-datos" id="loginClienteForm">
-            <div class="informacion-form">
-                <label for="nombre">Su Nombre</label>
-                <input
-                    type="text"
-                    id="nombre"
-                    class="correo-login"
-                    name="nombre"
-                    minlength="2"
-                    maxlength="30"
-                    required
-                    autocomplete="off"
-                >
-            </div>
+            <form class="form-datos" id="loginClienteForm">
+                <div style="margin-bottom: 20px; text-align: left;">
+                    <label for="nombre" style="color: #f8fafc; display: block; margin-bottom: 8px; font-weight: 600;">Su Nombre</label>
+                    <input
+                        type="text"
+                        id="nombre"
+                        style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #334155; background-color: #0f172a; color: white; font-size: 1rem;"
+                        name="nombre"
+                        minlength="2"
+                        maxlength="30"
+                        required
+                        autocomplete="off"
+                    >
+                </div>
 
-            <button class="btn-enviar" type="submit">Ingresar a la Tienda</button>
-        </form>
+                <button class="btn-finalizar" type="submit" style="width: 100%;">Ingresar a la Tienda</button>
+            </form>
+        </div>
     </main>
 
-    <!-- Ruta corregida relativa para evitar fallos de Live Server -->
-    <script src="/clientejs"></script>
+    <script src="/cliente.js"></script>
 </body>
 </html>
