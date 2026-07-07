@@ -4,25 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Store - Ingreso Cliente</title>
-    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+    <link class="favicon-pestana" rel="icon" href="./img/icono.ico" type="image/x-icon" sizes="32x32">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/login.css">    
 </head>
 <body>
 
+    <header class="navbar-tech">
+        <div class="navbar-tech-brand">
+            <img src="./img/logo.png" alt="Logo Tech Store">
+            <h1>Tech Store</h1>
+        </div>
+        
+        <div class="grupo-filtros" style="margin: 0;"> 
+            <a href="./login-admin.html" class="btn-navbar-nav">Panel Admin</a>
+        </div>
+    </header>
+
     <main class="carrito-page">
         <div class="bandeja-carrito" style="max-width: 450px; text-align: center;">
-            <h1 style="color: #f8fafc; margin-bottom: 10px;">¡Bienvenido!</h1>
-            <p style="color: #94a3b8; margin-bottom: 25px; font-size: 0.95rem;">
+            <h1 style="color: #222; margin-bottom: 10px;">¡Bienvenido!</h1>
+            <p style="color: #666; margin-bottom: 25px; font-size: 0.95rem;">
                 Ingresá tu nombre para empezar a comprar
             </p>
 
             <form class="form-datos" id="loginClienteForm">
                 <div style="margin-bottom: 20px; text-align: left;">
-                    <label for="nombre" style="color: #f8fafc; display: block; margin-bottom: 8px; font-weight: 600;">Su Nombre</label>
+                    <label for="nombre" style="color: #333; display: block; margin-bottom: 8px; font-weight: 600;">Su Nombre</label>
                     <input
                         type="text"
                         id="nombre"
-                        style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #334155; background-color: #0f172a; color: white; font-size: 1rem;"
+                        class="correo-login" 
                         name="nombre"
                         minlength="2"
                         maxlength="30"

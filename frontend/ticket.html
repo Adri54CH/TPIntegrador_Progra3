@@ -4,50 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tu Ticket - Tech Store</title>
-    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+    <link class="favicon-pestana" rel="icon" href="./img/icono.ico" type="image/x-icon" sizes="32x32">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
     <header class="navbar-tech">
-        <h1>Tech Store</h1>
-        <p style="color: #94a3b8; font-weight: bold; margin: 0;"> Autoservicio</p>
+        <div class="navbar-tech-brand">
+            <img src="./img/logo.png" alt="Logo Tech Store">
+            <h1>Tech Store</h1>
+        </div>
+        <div class="navbar-tech-derecha">
+            <span style="color: rgba(255, 255, 255, 0.85); font-weight: bold; font-size: 1.1rem; background-color: rgba(255,255,255,0.15); padding: 5px 15px; border-radius: 15px;">Autoservicio</span>
+        </div>
     </header>
 
     <main class="carrito-page">
-        <div class="bandeja-carrito" style="max-width: 500px; text-align: left;">
-            <div style="text-align: center; margin-bottom: 20px; border-bottom: 1px dashed #334155; padding-bottom: 15px;">
-                <h2 style="color: #f8fafc; margin-bottom: 5px;">Comprobante de Compra</h2>
-                <p style="color: #94a3b8; font-size: 0.9rem;">¡Gracias por su compra!</p>
+        <div class="bandeja-carrito bandeja-ticket-ancho">
+            
+            <div class="ticket-header">
+                <h2>Comprobante de Compra</h2>
+                <p>¡Gracias por su compra!</p>
             </div>
             
-            <p style="font-size: 1.1rem; margin-bottom: 20px; color: #f8fafc;">
-                <strong>Cliente:</strong> <span id="cliente-ticket" style="color: #38bdf8; font-weight: bold;">Cargando...</span>
+            <p class="ticket-cliente">
+                <strong>Cliente:</strong> <span id="cliente-ticket">Cargando...</span>
             </p>
 
-            <table class="tabla-carrito" style="margin-bottom: 25px;">
+            <table class="tabla-carrito">
                 <thead>
                     <tr>
                         <th>Producto</th>
-                        <th style="text-align: right;">Subtotal</th>
+                        <th class="txt-derecha">Subtotal</th>
                     </tr>
                 </thead>
                 <tbody id="lista-productos">
                     <tr>
-                        <td colspan="2" style="text-align: center; color: #94a3b8;">Buscando datos del ticket...</td>
+                        <td colspan="2" class="carrito-vacio-msg">Buscando datos del ticket...</td>
                     </tr>
                 </tbody>
             </table>
 
-            <div class="pie-carrito" style="border-top: 1px dashed #334155; padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
-                <h3 style="margin: 0;">Total Facturado:</h3>
-                <span id="total-ticket" style="color: #22c55e; font-size: 1.5rem; font-weight: bold;">$0.00</span>
+            <div class="ticket-separador-total">
+                <h3>Total Facturado:</h3>
+                <span id="total-ticket" class="ticket-total-num">$0.00</span>
             </div>
 
-            <div style="margin-top: 30px; display: flex; gap: 12px;">
-                <button onclick="window.print()" class="btn-finalizar" style="background-color: #64748b; flex: 1;">
+            <div class="ticket-botonera">
+                <button onclick="window.print()" class="btn-finalizar btn-secundario-gris">
                     Guardar PDF / Imprimir
                 </button>
-                <button id="btn-reiniciar" class="btn-finalizar" style="flex: 1;">
+                <button id="btn-reiniciar" class="btn-finalizar">
                     Nueva Compra
                 </button>
             </div>

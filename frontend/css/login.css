@@ -1,0 +1,45 @@
+
+/* Contenedor principal que centra la tarjeta en la pantalla */
+.contenedor-login-centro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 110px);
+    padding: 20px;
+}
+
+/* El formulario propiamente dicho ordenado hacia abajo */
+.form-datos {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
+
+/* Envoltura para cada etiqueta e input */
+.form-group-login {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group-login label {
+    color: #333;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Estilo unificado para las cajas de texto de los logins */
+.correo-login,
+.contrasena-login,
+#nombre {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #b2c5df;
+    background-color: #f8fafc;
+    color: #333;
+    font-size: 1rem;
+    outline: none;
+    box-sizing: border-box; 
+}

@@ -1,42 +1,87 @@
 
-.ticket-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    border: 2px dashed #333;
-    background-color: #f9f9f9;
-    font-family: 'Courier New', Courier, monospace; /* Onda recibo de caja */
-    text-align: center;
+/* Contenedor y ajuste de la tarjeta del ticket */
+.bandeja-ticket-ancho {
+    max-width: 500px;
+    width: 100%;
 }
 
-.ticket-container h1 {
-    color: #2c3e50;
+/* Encabezado de la boleta */
+.ticket-header {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #cbd5e1;
+    padding-bottom: 15px;
+}
+
+.ticket-header h2 {
+    color: #222;
     margin-bottom: 5px;
 }
 
-table {
-    width: 100%;
-    margin: 20px 0;
-    border-collapse: collapse;
+.ticket-header p {
+    color: #666;
+    font-size: 0.9rem;
 }
 
-th, td {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+/* Datos del Cliente */
+.ticket-cliente {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #333;
 }
 
-.total {
-    font-size: 1.2em;
-    margin-top: 20px;
-    border-top: 2px solid #333;
-    padding-top: 10px;
+.ticket-cliente span {
+    color: #007bff;
+    font-weight: bold;
 }
 
-footer button {
-    margin-top: 20px;
-    background-color: #2c3e50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
+/* Sección de totales y líneas de corte */
+.ticket-separador-total {
+    border-top: 1px dashed #cbd5e1;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticket-separador-total h3 {
+    margin: 0;
+    color: #333;
+}
+
+.ticket-total-num {
+    color: #28a745;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Botonera inferior del ticket */
+.ticket-botonera {
+    margin-top: 30px;
+    display: flex;
+    gap: 12px;
+}
+
+.ticket-botonera button {
+    flex: 1;
+}
+
+/* Variación de botón gris para imprimir */
+.btn-secundario-gris {
+    background-color: #6c757d;
+}
+
+.btn-secundario-gris:hover {
+    background-color: #5a6268;
+}
+
+.txt-derecha {
+    text-align: right;
+}
+
+.navbar-tech-derecha {
+    margin: 0;
+    display: flex;
+    gap: 15px;
+    align-items: center;
 }

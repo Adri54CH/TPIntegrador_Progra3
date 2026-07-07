@@ -10,16 +10,70 @@ body {
     background-color: aliceblue; 
 }
 
-/* Barra de navegación */
+/* Barra de navegación unificada */
 .navbar-tech {
     background-color: #007bff; 
     color: white;              
-    padding: 15px 30px;        
+    padding: 10px 30px;       
+    height: 110px;             
     display: flex;             
     justify-content: space-between; 
     align-items: center;       
     box-shadow: 0 2px 10px rgba(0,0,0,0.15); 
     width: 100%;
+}
+
+/* El bloque izquierdo que agrupa Logo + Texto + Nombre Cliente */
+.navbar-tech-brand {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* Control del tamaño del logo */
+.navbar-tech-brand img {
+    height: 90px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin-right: -15px; /* Mantiene el texto cerca del logo */
+}
+
+.navbar-tech h1 {
+    font-size: 2.2rem;       /* Tamaño del texto principal */
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+/* El badge con el nombre del cliente logueado */
+#nombre-cliente {
+    color: #e2e8f0;
+    font-weight: 600;
+    font-size: 1.1rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 5px 12px;
+    border-radius: 15px;
+    margin-left: 20px;
+}
+
+/* Botón admin de cerrar sesión */ 
+.btn-navbar-nav {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 1px solid white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-navbar-nav:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Movimos esto acá arriba para que todo lo del header esté junto */
