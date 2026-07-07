@@ -180,7 +180,16 @@ const mostrarVenta = async(id)=>{
 
 }
 
+const crearUsuario = async(correo,hash)=>{
 
+    const sql = "INSERT INTO usuarios(correo,contrasena) VALUES(?,?)";
+
+    await pool.query(sql,[correo,hash]);
+
+
+
+
+}
 module.exports = {
     obtenerTodos,
     agregarProducto,
@@ -190,6 +199,7 @@ module.exports = {
     obtenerProducto,
     comprobarProductoPorNombre,
     registrarVenta,
-    mostrarVenta
+    mostrarVenta,
+    crearUsuario
 };
 

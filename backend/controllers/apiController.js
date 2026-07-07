@@ -1,5 +1,5 @@
 const apiModel = require("../models/apiModel");
-
+const bcrypt = require("bcrypt");
 const obtenerProductos = async(req,res)=>{
     
     try{
@@ -141,7 +141,18 @@ const mostrarVenta = async(req,res)=>{
     res.json({resultado});
 }
 
+const crearUsuario = async(req,res)=>{
+    const {email,password} = req.body;
 
+    const hash = await bcrypt.hash(password,10);
+
+    await apiModel.crearUsuario(email,hash);
+
+    res.json({mensaje:"Administrador creado con exito"});
+
+    
+
+}
 module.exports = {
     obtenerProductos,
     agregarProducto,
@@ -150,6 +161,7 @@ module.exports = {
     activarProducto,
     obtenerProducto,
     registrarVenta,
-    mostrarVenta
+    mostrarVenta,
+    crearUsuario
 };
 

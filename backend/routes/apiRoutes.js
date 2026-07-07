@@ -34,6 +34,10 @@ router.post("/ventas",apiController.registrarVenta);
 
 router.get("/ventas/:id",apiController.mostrarVenta);
 
+//Endpoint para agregar un usuario administrador
+
+router.post("/usuarios",apiController.crearUsuario);
+
 
 module.exports = router;
 
