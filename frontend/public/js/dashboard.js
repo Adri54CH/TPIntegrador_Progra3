@@ -9,17 +9,19 @@ document.getElementById("agregar-admin").addEventListener("click",()=>{
 
 })
 
-botonAgregarUsuario.addEventListener("click",()=>{
-    
 
-    alert("agregar usuario presionado");
-})
 // Redireccion a una nueva vista 
 const botonAgregar = document.getElementById("agregar-producto").addEventListener("click",()=>{
 
     window.location.href = "/altaProducto.html";
 
     
+
+})
+
+document.getElementById("volver-login-admin").addEventListener("click",()=>{
+
+    window.location.href = "/login-admin.html";
 
 })
 

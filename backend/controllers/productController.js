@@ -24,7 +24,6 @@ const obtenerProductos = async(req,res)=>{
 
 const agregarProducto = async(req,res)=>{
     
-
     const {nombre,categoria,precio,urlImagen} = req.body;
 
 

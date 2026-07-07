@@ -2,9 +2,19 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "IBM Plex Mono";
+    /* font-size: 16px ; */
+    /* color: white; */
 }
 
+body{
 
+    background-color: #f5f5f5;
+    color: #000;
+}
+h1{
+    margin-bottom: 10px;
+}
 .modal-edicion{
     
     display: none;
@@ -105,3 +115,21 @@
     
     display: none;
 }
+
+button{
+
+    background-color: aliceblue;
+    border: 1px solid black;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    
+}
+
+button:hover{
+
+    background-color: rgb(203, 222, 240);
+    
+    
+}
+

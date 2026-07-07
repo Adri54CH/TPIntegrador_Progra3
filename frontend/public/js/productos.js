@@ -167,7 +167,8 @@ const asignarEventosBotones = () => {
 
 const init = () => {
 
-
+    
+    
     const nombreUsuario = localStorage.getItem("nombreUsuario") || sessionStorage.getItem("nombreCliente");
 
     if (!nombreUsuario) {
@@ -185,6 +186,9 @@ const init = () => {
     if (carritoGuardado) {
         carrito = JSON.parse(carritoGuardado);
     }
+
+
+    
     cargarProductos();  
     actualizarContadorCarrito(); 
 };

@@ -15,7 +15,7 @@ document.querySelector("form").addEventListener("submit",(e)=>{
 
 
 
-    fetch("/api/agregarProducto",{
+    fetch("/productos/agregarProducto",{
         method: "POST",
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify({
