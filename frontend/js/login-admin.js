@@ -3,11 +3,11 @@ document.querySelector(".form-datos").addEventListener("submit",(e)=>{
     e.preventDefault();
 
 
+    // Obtengo los datos ingresados en el formulario 
     const email = document.querySelector(".correo-login").value;
     const contrasena = document.querySelector(".contrasena-login").value;
 
     const datos = {email,contrasena};
-
 
 
     fetch("/validarLogin",{
@@ -18,22 +18,21 @@ document.querySelector(".form-datos").addEventListener("submit",(e)=>{
         body: JSON.stringify(datos)
     }).then(res => res.json())
     .then(res => {
-        //no se encontro al usuario
-        if(res.mensaje === "usuario no valido" || res.mensaje === "contraseña incorrecta"){
 
-            alert("Ingrese un usuario valido");
+        //No se encontro al 
+        if(!res.salida){
+        
+            alert(res.mensaje);
             
         }
-        // se encontro al usuario
+        // Se encontro al usuario
         else{
 
-            // se hace una peticion para cargar una nueva pagina 
+            // Se hace una peticion para cargar una nueva pagina 
             window.location.href = "/dashboard";
 
 
         }
-        //Validacion de datos 
-
 
 
 
