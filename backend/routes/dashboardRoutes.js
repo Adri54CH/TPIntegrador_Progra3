@@ -5,6 +5,8 @@ const dashboardRouter = express.Router();
 
 const dashboardController = require("../controllers/dashboardController");
 
+
+//Endpoint para servir 'dashboard.ejs' hmtl generado desde el servidor 
 dashboardRouter.get("/",dashboardController.mostrarDashboard);
 
 
