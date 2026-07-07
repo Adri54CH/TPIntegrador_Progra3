@@ -10,7 +10,6 @@ export async function getProductos() {
 }
 
 const card = (producto) => {
-    // Apunta siempre a la raíz /images/ del frontend
     let urlImagen = producto.imagen ? `/images/${producto.imagen}` : '/images/default.png';
     
     if (producto.imagen && producto.imagen.startsWith('http')) {
@@ -22,7 +21,7 @@ const card = (producto) => {
         <img src="${urlImagen}" alt="${producto.nombre}" style="width: 100%; height: 200px; object-fit: contain; border-radius: 8px; margin-bottom: 10px; background-color: #0f172a; padding: 10px;">
         <h2>${producto.nombre}</h2>
         <p class="precio">$${producto.precio}</p>
-        <button class="btn-agregar" data-id="${producto.id}">
+        <button class="btn-agregar" data-id="${producto.id || producto._id}">
             Agregar al carrito
         </button>
     </article>
@@ -46,9 +45,13 @@ const cargarProductos = async () => {
 
         const categoriasAgrupadas = {};
 
-        productos.forEach(producto => {
+        productos.forEach((producto, index) => {
             const cumpleActivo = producto.activo === 1 || producto.activo === true;
             if (cumpleActivo) {
+                if (!producto.id) {
+                    producto.id = producto._id || `prod-${index}`;
+                }
+
                 let cat = producto.categoria ? producto.categoria.trim() : "Otros";
                 cat = cat.charAt(0).toUpperCase() + cat.slice(1).toLowerCase();
 
@@ -97,14 +100,16 @@ const cargarProductos = async () => {
                     
                     let mostrar = false;
 
-                    // Corregidas las comparaciones para que coincidan con los atributos creados
                     if (filtroSeleccionado === "todos") {
                         mostrar = true;
                     } else if (filtroSeleccionado === "mouses" && nombreCatSeccion === "mouses") {
                         mostrar = true;
                     } else if (filtroSeleccionado === "teclados" && nombreCatSeccion === "teclados") {
                         mostrar = true;
-                    } else if (filtroSeleccionado === "audio" && (nombreCatSeccion === "audio" || nombreCatSeccion === "auriculares" || nombreCatSeccion === "parlantes")) {
+                    } else if (filtroSeleccionado === "audio" && (nombreCatSeccion === "audio" || nombreCatSeccion === "auriculares" || nombreCatSeccion === "parlantes" || nombreCatSeccion === "microfonos")) {
+                        mostrar = true;
+                    // LÓGICA DE FUSIÓN PARA VIDEO: Muestra monitores, webcams o pantallas
+                    } else if (filtroSeleccionado === "video" && (nombreCatSeccion === "video" || nombreCatSeccion === "monitores" || nombreCatSeccion === "webcam" || nombreCatSeccion === "webcams")) {
                         mostrar = true;
                     }
 
@@ -136,11 +141,11 @@ const asignarEventosBotones = () => {
     const botones = document.querySelectorAll(".btn-agregar");
     botones.forEach(boton => {
         boton.addEventListener("click", (e) => {
-            const idProducto = parseInt(e.target.getAttribute("data-id"));
-            const productoOriginal = productos.find(item => item.id === idProducto);
+            const idProducto = e.target.getAttribute("data-id");
+            const productoOriginal = productos.find(item => String(item.id || item._id) === idProducto);
             
             if (productoOriginal) {
-                const productoEnCarrito = carrito.find(item => item.id === idProducto);
+                const productoEnCarrito = carrito.find(item => String(item.id || item._id) === idProducto);
                 
                 if (productoEnCarrito) {
                     alert("El producto ya está en el carrito");
