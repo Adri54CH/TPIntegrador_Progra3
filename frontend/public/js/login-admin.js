@@ -1,3 +1,10 @@
+// Logica para limpiar los inputs 
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelector(".correo-login").value = "";
+    document.querySelector(".password-login").value = "";
+});
+
+
 document.querySelector(".form-datos").addEventListener("submit",(e)=>{
 
     e.preventDefault();
@@ -46,4 +53,14 @@ document.querySelector(".form-datos").addEventListener("submit",(e)=>{
 
 
 })
+
+//Logica para rellenar los inputs
+document.querySelector(".btn-filtro").addEventListener("click",()=>{
+
+    document.querySelector(".correo-login").value = "adriquiroz00@gmail.com";
+    document.querySelector(".contrasena-login").value = "123";
+
+
+})
+
 

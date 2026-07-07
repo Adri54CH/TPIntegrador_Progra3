@@ -18,9 +18,9 @@ const card = (producto) => {
 
     return `
     <article class="tarjeta-producto">
-        <img src="${urlImagen}" alt="${producto.nombre}" style="width: 100%; height: 200px; object-fit: contain; border-radius: 8px; margin-bottom: 10px; background-color: #0f172a; padding: 10px;">
+        <img src="${urlImagen}" alt="${producto.nombre}" style="width: 100%; height: 200px; object-fit: contain; border-radius: 8px; margin-bottom: 10px; padding: 10px;">
         <h2>${producto.nombre}</h2>
-        <p class="precio">$${producto.precio}</p>
+        <p class="precio">$${producto.precio}</p>       
         <button class="btn-agregar" data-id="${producto.id || producto._id}">
             Agregar al carrito
         </button>

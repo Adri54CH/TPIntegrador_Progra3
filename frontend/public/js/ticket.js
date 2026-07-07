@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", async() => { 
 
-
+    //Logica para volver al login del cliente
+    document.getElementById("btn-reiniciar").addEventListener("click",()=>{
+        window.location.href = "/login-cliente.html"
+    })
     // Leo la id de la url 
     const params = new URLSearchParams(window.location.search);
     const idVenta = params.get("id");
@@ -17,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async() => {
 
     const contenedorCliente = document.getElementById("cliente-ticket");
     const contenedorLista = document.getElementById("lista-productos");
-    const contenedorTotal = document.querySelector(".total strong");
+    const contenedorTotal = document.querySelector(".ticket-total-num");
 
     // Mostramos el nombre del cliente si agregaste el span
     if (contenedorCliente) {
@@ -56,5 +59,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     if (contenedorTotal) {
         contenedorTotal.innerText = `Total: $${totalGeneral.toFixed(2)}`;
     }
+
+    
 
 });
