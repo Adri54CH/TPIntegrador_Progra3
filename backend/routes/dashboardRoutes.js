@@ -11,8 +11,6 @@ dashboardRouter.get("/",dashboardController.mostrarDashboard);
 
 
 
-
-
 // Exporto el router 'dashboardRouter'
 module.exports = dashboardRouter;
 

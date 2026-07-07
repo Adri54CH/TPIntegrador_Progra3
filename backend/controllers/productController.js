@@ -7,7 +7,6 @@ const bcrypt = require("bcrypt");
 const obtenerProductos = async(req,res)=>{
     
     try{
-        console.log("obtenermos los productos en los controladores")
         const productos = await productoModel.obtenerTodos(); 
 
 
