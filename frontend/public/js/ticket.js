@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async() => {
 
     //Logica para volver al login del cliente
     document.getElementById("btn-reiniciar").addEventListener("click",()=>{
-        window.location.href = "/login-cliente.html"
+        window.location.href = "/"
     })
     // Leo la id de la url 
     const params = new URLSearchParams(window.location.search);
