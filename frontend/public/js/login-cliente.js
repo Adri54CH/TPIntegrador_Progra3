@@ -12,5 +12,6 @@ document.querySelector("form").addEventListener("submit", (e) => {
     localStorage.setItem("nombreUsuario", nombre);
     console.log("Nombre guardado con éxito:", localStorage.getItem("nombreUsuario"));
 
-    window.location.href = "productos.html"; 
+    // Redirecciono a productos.html
+    window.location.href = "/productos.html"; 
 });

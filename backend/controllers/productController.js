@@ -1,5 +1,4 @@
 const productoModel = require("../models/productModel");
-const path = require("path");
 
 
 const bcrypt = require("bcrypt");
@@ -121,23 +120,7 @@ const crearUsuario = async(req,res)=>{
 
 }
 
-const mostrarProductos = (req,res)=>{
 
-    res.sendFile(path.join(__dirname,"../../frontend/productos.html"));
-
-}
-
-const mostrarCssProductos = (req,res)=>{
-
-    res.sendFile(path.join(__dirname,"../../frontend/css/styles.css"));
-
-}
-
-const mostrarJsProductos = (req,res)=>{
-
-    res.sendFile(path.join(__dirname,"../../frontend/js/productos.js"));
-
-}
 
 module.exports = {
     obtenerProductos,
@@ -146,9 +129,6 @@ module.exports = {
     editarProducto,
     activarProducto,
     obtenerProducto,
-    crearUsuario,
-    mostrarProductos,
-    mostrarCssProductos,
-    mostrarJsProductos
+    crearUsuario
 };
 

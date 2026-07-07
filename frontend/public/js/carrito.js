@@ -123,6 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Redirección al finalizar
     if (btnFinalizar) {
         btnFinalizar.addEventListener("click", async() => {
+
             if (carrito.length === 0) {
                 alert("El carrito está vacío.");
                 return;
@@ -157,8 +158,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             
 
-            //Se redirecciona a la vista principal  
-            window.location.href = `/ticket?id=${data.idVenta}`;
+            //Se redireccion a la vista 'ticket.html'
+            window.location.href = `/ticket.html?id=${data.idVenta}`;
             
         });
     }

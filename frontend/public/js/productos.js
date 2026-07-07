@@ -170,7 +170,7 @@ const init = () => {
 
     if (!nombreUsuario) {
         alert("Debes ingresar tu nombre antes de comprar.");
-        window.location.href = "./login-cliente.html";
+        window.location.href = "/login-cliente.html";
         return; 
     }
 

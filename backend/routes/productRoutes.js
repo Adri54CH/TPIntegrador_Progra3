@@ -26,16 +26,6 @@ router.put("/activarProducto/:idProducto",productController.activarProducto);
 
 router.get("/producto/:id",productController.obtenerProducto);
 
-// Endpoint para devolver 'productos.hmtl'
-router.get("/",productController.mostrarProductos);
-
-// Endopoint para servir 'productos.css'
-router.get("/css",productController.mostrarCssProductos);
-
-//Endpoint para servir 'productos.css'
-router.get("/js",productController.mostrarJsProductos);
-
-
 
 //Endpoint para agregar un usuario administrador
 

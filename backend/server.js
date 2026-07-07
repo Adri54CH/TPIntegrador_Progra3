@@ -19,9 +19,7 @@ app.use(express.json());
 const routerDashboard = require("./routes/dashboardRoutes");
 const routerAutenticacion = require("./routes/autenticacionRoutes");
 const routerProducto = require("./routes/productRoutes");
-const routerTicket = require("./routes/ticketRoutes");
-const routerCarrito = require("./routes/carritoRoutes");
-
+const routerVenta = require("./routes/ventaRoutes");
 
 
 // Grupo de rutas para el dashboard 
@@ -33,12 +31,8 @@ app.use("/",routerAutenticacion)
 //Grupo de rutas para los productos 
 app.use("/productos",routerProducto);
 
-//Grupo de rutas para el carrito
-app.use("/carrito",routerCarrito);
-
-//Grupo de rutas para el ticket
-app.use("/ticket",routerTicket);
-
+//Grupo de rutas para las ventas 
+app.use("/ventas",routerVenta);
 
 
 app.set("view engine","ejs");
@@ -47,7 +41,7 @@ app.set("views",path.join(__dirname,"views"));
 
 
 
-app.use(express.static(path.join(__dirname,"public")));
+app.use(express.static(path.join(__dirname,"../frontend/public")));
 
 
 
