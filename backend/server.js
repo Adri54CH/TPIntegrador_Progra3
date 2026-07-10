@@ -1,6 +1,4 @@
 // importo el modulo express
-// importo el modulo de env 
-require("dotenv").config({path:__dirname + "/../.env"});
 const express = require("express");
 // importo el modulo path de Nodejs
 const path = require("path");

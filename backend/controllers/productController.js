@@ -63,17 +63,15 @@ const eliminarProducto = async(req,res)=>{
 
 const editarProducto = async(req,res)=>{
 
-
     const id = req.params.id; // obtengo la id enviada por la url 
     const datos = req.body; // obtengo el objeto enviado mediante el body
-    
      //Destructuracion del objeto req.body
     const {nuevoNombre,nuevoPrecio,nuevaUrl,nuevaCategoria} = req.body;
     const nuevoPrecioLimpio = nuevoPrecio.replace("Precio: $","");
     const nuevoCategoriaLimpio = nuevaCategoria.replace("Categoría: ", "");
 
 
-    await productoModel.editarProducto();
+    await productoModel.editarProducto(id,nuevoNombre,nuevoPrecioLimpio,nuevaUrl,nuevoCategoriaLimpio);
 
     res.json({mensaje:"Se edito el producto con exito"});
 

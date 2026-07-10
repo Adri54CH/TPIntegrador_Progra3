@@ -143,7 +143,7 @@ document.querySelector(".btn-confirmar-activacion").addEventListener("click",()=
 })
 function activarProducto(idProducto){
 
-    fetch(`/api/activarProducto/${idProducto}`,{
+    fetch(`/productos/activarProducto/${idProducto}`,{
         method: "PUT",
 
     }).then(res => res.json())
@@ -212,7 +212,7 @@ async function renderizarProductos(){
 //Funcion para obtener lista de productos 
 function obtenerProductos(){
     
-    return fetch("/api/productos")
+    return fetch("/productos")
     .then(res => res.json())
     .then(data => {
         
@@ -235,7 +235,7 @@ function eliminarProducto(idProducto){
     
 
     // Peticion delete para eliminar un producto
-    return fetch(`/api/eliminarProducto/${idProducto}`,{
+    return fetch(`/productos/eliminarProducto/${idProducto}`,{
         method: "DELETE"
     }).then(res => res.json())
     .then(res => console.log(res))
@@ -252,7 +252,7 @@ function eliminarProducto(idProducto){
 function editarProducto(idProducto){
 
 
-    fetch(`/api/editarProducto/${idProducto}`,{
+    fetch(`/productos/editarProducto/${idProducto}`,{
         method: "PUT"
     }).then(res => res.json())
     .then(res => console.log(res));

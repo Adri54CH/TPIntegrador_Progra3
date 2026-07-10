@@ -168,7 +168,6 @@ const asignarEventosBotones = () => {
 const init = () => {
 
     
-    
     const nombreUsuario = localStorage.getItem("nombreUsuario") || sessionStorage.getItem("nombreCliente");
 
     if (!nombreUsuario) {

@@ -1,18 +1,17 @@
 const modalEdicion = document.querySelector(".modal-edicion");
 
+const parametros = new URLSearchParams(window.location.search);
+
+const id = parametros.get("id");
+
 //Logica para cargar el formulario cuando se termine de cargar la pagina 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Obtengo el valor de id de la url .
-
-    const parametros = new URLSearchParams(window.location.search);
-
-    const id = parametros.get("id");
 
     // Hago una peticion al servidor para obtener los datos del producto 
 
 
-    fetch(`/api/producto/${id}`).then(res => res.json())
+    fetch(`/productos/producto/${id}`).then(res => res.json())
     .then(res => {
 
         const {producto} = res;
@@ -44,7 +43,7 @@ document.querySelector(".form-edicion").addEventListener("submit",(e)=>{
     
     // Peticion fetch para hacer los cambios 
 
-    fetch(`/api/editarProducto/${idProductoEditar}`,{
+    fetch(`/productos/editarProducto/${id}`,{
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -54,7 +53,7 @@ document.querySelector(".form-edicion").addEventListener("submit",(e)=>{
     }).then(()=>{
         
 // Cambio la url para cambiar de vista (dashboard)
-        window.location.href = "/dashboard.html";
+        window.location.href = "/dashboard";
 
 
     })

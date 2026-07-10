@@ -60,7 +60,7 @@ document.getElementById("cerrar-modal").addEventListener("click",()=>{
 
     // cambio de pagina 
     window.location.href = "/dashboard";
-
+    
 
 })
 

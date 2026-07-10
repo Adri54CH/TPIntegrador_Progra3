@@ -70,8 +70,6 @@ const editarProducto = async(id, nuevoNombre, nuevoPrecioLimpio, nuevaUrl, nuevo
         
 
         // Se edita el producto de la base de datos 
-
-
         await pool.query("UPDATE productos SET nombre = ?,precio = ?,imagen=?,categoria=? WHERE id = ?",[nuevoNombre,nuevoPrecioLimpio,nuevaUrl,nuevoCategoriaLimpio,id]);
 
 
