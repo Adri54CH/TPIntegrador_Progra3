@@ -1,14 +1,15 @@
-const express = require("express");
+import express from 'express';
 
+// importo el controlador de autenticacion
+import * as autenticacionController from '../controllers/autenticacionController.js';
 
 const autenticacionRouter = express.Router();
 
-const autenticacionController = require("../controllers/autenticacionController");
 
 
 //Endpoint para validar el login
 autenticacionRouter.post("/validarLogin",autenticacionController.validarLogin);
 
 
-
-module.exports = autenticacionRouter;
+// exporto el router autenticacionRouter 
+export default autenticacionRouter; 

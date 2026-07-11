@@ -1,36 +1,30 @@
-const pool = require("../config/db");
+// importo el pool del archivo de configuracion
+import pool from '../config/db.js';
+
 
 const registrarVenta = async(total,cliente,carrito)=>{
     
-    try{
-        //Guardo informacion del resultado de la consulta 
-        const [resultadoVenta] = await pool.query(
-        "INSERT INTO ventas (cliente_nombre,total,fecha) VALUES(?,?,NOW())",
-        [cliente,total]);
+    
+    //Guardo informacion del resultado de la consulta 
+    const [resultadoVenta] = await pool.query(
+    "INSERT INTO ventas (cliente_nombre,total,fecha) VALUES(?,?,NOW())",
+    [cliente,total]);
 
-        //Obtengo la id de la venta creada 
-        const ventaId = resultadoVenta.insertId;
+    //Obtengo la id de la venta creada 
+    const ventaId = resultadoVenta.insertId;
 
-        for(const item of carrito){
-            
-            await pool.query("INSERT INTO venta_productos (venta_id,producto_id,cantidad,precio_unitario) VALUES (?,?,?,?)",[
-                ventaId,
-                item.id,
-                item.cantidad,
-                item.precio
-            ]);
-        }
-
-        return ventaId; 
-
+    for(const item of carrito){
         
+        await pool.query("INSERT INTO venta_productos (venta_id,producto_id,cantidad,precio_unitario) VALUES (?,?,?,?)",[
+            ventaId,
+            item.id,
+            item.cantidad,
+            item.precio
+        ]);
     }
-    catch(error){
 
-        console.log(error);
-        throw error;
+    return ventaId; 
 
-    }
 }
 
 const mostrarVenta = async(id)=>{
@@ -51,7 +45,7 @@ const mostrarVenta = async(id)=>{
 }
 
 
-module.exports = {
+export {
     mostrarVenta,
     registrarVenta
 }

@@ -1,17 +1,20 @@
 
 // Archivo de configuracion 'db'
 
-const mysql = require("mysql2/promise");
+//Importo el modulo de mysql que trabaja con promesas 
+import mysql from 'mysql2/promise';
 
-
+// Hago uso de las variables de entorno previamente cargadas y 
+// creamos un pool de conexiones con referencia a mi base de datos 
 const pool = mysql.createPool({
-    host: "localhost",
-    user: "admin",
-    password: "1234",
-    database: "autoservicio"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 });
 
 
 // Exporto el pool 
-module.exports = pool;
+export default pool;
+
 

@@ -1,130 +1,65 @@
 // importo 'pool' del archivo de configuracion
-// const { profileEnd } = require("node:console");
-const pool = require("../config/db");
-
+import pool from '../config/db.js';
 
 const obtenerTodos = async()=>{
     
-    try{
-        
-        // obtengo el resultado de la query
-        const resultado = await pool.query("SELECT * FROM productos");
-        // Me quedo con el array de productos 'productos'
-        const [productos] = resultado;
+    // obtengo el resultado de la query
+    const resultado = await pool.query("SELECT * FROM productos");
+    // Me quedo con el array de productos 'productos'
+    const [productos] = resultado;
 
-        return productos;
-    }
-    catch(error){
-
-        console.error(error);
-        
-    }
-
+    return productos;
+    
 
 }
 
 const agregarProducto = async(nombre,categoria,precio,urlImagen) =>{
 
+    const sql = `INSERT INTO productos (nombre, categoria, precio, activo, imagen)
+    VALUES (?, ?, ?, ?, ?)`;
 
-    try{
-
-        const sql = `INSERT INTO productos (nombre, categoria, precio, activo, imagen)
-        VALUES (?, ?, ?, ?, ?)`;
-
-        
-        await pool.query(sql,[nombre,categoria,precio,1,urlImagen]);
+    
+    await pool.query(sql,[nombre,categoria,precio,1,urlImagen]);
 
 
-        
-    }
-
-
-    catch(error)
-    {
-        console.error(error);
-
-    }
 }
 
 const eliminarProducto = async(id)=>{
 
-    
-    try{
-        
+    await pool.query("UPDATE productos SET activo = 0 WHERE id = ?",[id]);
 
-        await pool.query("UPDATE productos SET activo = 0 WHERE id = ?",[id]);
-
-
-
-    }
-    catch(error){
-        console.error(error);
-
-    }
 }
 
 const editarProducto = async(id, nuevoNombre, nuevoPrecioLimpio, nuevaUrl, nuevoCategoriaLimpio)=>{
 
-
-    try{
-        
-
-        // Se edita el producto de la base de datos 
-        await pool.query("UPDATE productos SET nombre = ?,precio = ?,imagen=?,categoria=? WHERE id = ?",[nuevoNombre,nuevoPrecioLimpio,nuevaUrl,nuevoCategoriaLimpio,id]);
+    // Se edita el producto de la base de datos 
+    await pool.query("UPDATE productos SET nombre = ?,precio = ?,imagen=?,categoria=? WHERE id = ?",[nuevoNombre,nuevoPrecioLimpio,nuevaUrl,nuevoCategoriaLimpio,id]);
 
 
-    }
-    catch(error){
-        console.error(error);
-
-    }
 }
 
 const activarProducto = async(id)=>{
 
-
-    try{
-        
-
-        await pool.query("UPDATE productos SET activo = true WHERE id = ?",[id]);
+    await pool.query("UPDATE productos SET activo = true WHERE id = ?",[id]);
 
 
-    }
-    catch(error){
-        console.error(error);
-
-    }
 }
 
 const obtenerProducto = async(id)=>{
 
-    try{
+    const [rows] = await pool.query("SELECT * FROM productos WHERE id = ?",[id]);
     
-        const [rows] = await pool.query("SELECT * FROM productos WHERE id = ?",[id]);
-        
-        return rows[0];
-    }
+    return rows[0];
+    
 
-    catch(error){
-
-        console.log(error);
-
-
-    }
 } 
 
 const comprobarProductoPorNombre = async(nombre)=>{
 
-    try{
-        
-        const [rows] = await pool.query("SELECT * FROM productos WHERE nombre=?",[nombre]);
-        return rows;
-    }
-    catch(error){
-        
-        console.log(error);
 
-    }
+    const [rows] = await pool.query("SELECT * FROM productos WHERE nombre=?",[nombre]);
+    return rows;
+
 
 }
 
@@ -137,7 +72,7 @@ const crearUsuario = async(correo,hash)=>{
 
 }
 
-module.exports = {
+export {
     obtenerTodos,
     agregarProducto,
     eliminarProducto,

@@ -1,10 +1,10 @@
-const express = require("express");
+import express from 'express';
 
+//Importo el controlador del dashboard 
+import * as dashboardController from '../controllers/dashboardController.js';
 
+// Creo una instancia de Router 
 const dashboardRouter = express.Router();
-
-const dashboardController = require("../controllers/dashboardController");
-
 
 //Endpoint para servir 'dashboard.ejs' hmtl generado desde el servidor 
 dashboardRouter.get("/",dashboardController.mostrarDashboard);
@@ -12,5 +12,5 @@ dashboardRouter.get("/",dashboardController.mostrarDashboard);
 
 
 // Exporto el router 'dashboardRouter'
-module.exports = dashboardRouter;
+export default dashboardRouter;
 

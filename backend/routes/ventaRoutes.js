@@ -1,8 +1,10 @@
-const express = require("express");
+import express from 'express';
+
+// importo el controlador de venta 
+import * as ventaController from '../controllers/ventaController.js';
 
 const ventaRouter = express.Router();
 
-const ventaController = require("../controllers/ventaController");
 
 //Endpoint para registrar ventas 
 ventaRouter.post("/",ventaController.registrarVenta);
@@ -10,5 +12,5 @@ ventaRouter.post("/",ventaController.registrarVenta);
 //Endpoint para obtener una venta por id 
 ventaRouter.get("/:id",ventaController.mostrarVenta);
 
-
-module.exports = ventaRouter;
+// exporto el router 'ventaRouter'
+export default ventaRouter;

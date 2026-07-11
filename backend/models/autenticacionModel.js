@@ -1,7 +1,10 @@
 // importo 'pool' del archivo de configuracion
-const pool = require("../config/db");
+import pool from '../config/db.js';
 
-const bcrypt = require("bcrypt");
+// importo el modulo 'bcrypt'
+import bcrypt from 'bcrypt';
+
+
 
 
 const validarLogin = async(correo,password)=>{
@@ -29,6 +32,6 @@ const validarLogin = async(correo,password)=>{
 }
 
 
-module.exports = {
+export  {
     validarLogin
 }

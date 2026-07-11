@@ -1,9 +1,11 @@
-const express = require("express");
+import express from 'express';
+
+// importo el controlador de product 
+import * as productController from '../controllers/productController.js';
 
 
 const router = express.Router();
 
-const productController = require("../controllers/productController");
 
 // Endpoint para mostrar los productos 
 router.get("/",productController.obtenerProductos);
@@ -33,6 +35,6 @@ router.post("/usuarios",productController.crearUsuario);
 
 
 
-
-module.exports = router;
+// exporto el router 
+export default router;
 

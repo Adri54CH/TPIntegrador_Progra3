@@ -1,20 +1,33 @@
-const ventaModel = require("../models/ventaModel");
+import * as ventaModel from '../models/ventaModel.js';
 
 const registrarVenta = async(req,res)=>{
 
-    const {nombreCliente,carrito}=req.body;
-    let total = 0;
 
-    //Calculo el total de la venta 
-    carrito.forEach(item=>{
-        total+=item.precio * item.cantidad;
-    })
+    try{
 
-    //Inserto registro en tabla ventas
+        // extraigo el nombre del cliente y el carrito del body
+        const {nombreCliente,carrito}=req.body;
+        let total = 0;
     
-    const idVenta = await ventaModel.registrarVenta(total,nombreCliente,carrito);
+        //Calculo el total de la venta 
+        carrito.forEach(item=>{
+            total+=item.precio * item.cantidad;
+        })
+    
+        //Inserto registro en tabla ventas
+        
+        const idVenta = await ventaModel.registrarVenta(total,nombreCliente,carrito);
+    
+        res.json({ok:true,idVenta,total});
 
-    res.json({ok:true,idVenta,total});
+        
+    }
+    // manejo de excepciones 
+    catch(error){
+        console.error(error);
+
+    }
+
 
     
 
@@ -22,21 +35,34 @@ const registrarVenta = async(req,res)=>{
 
 const mostrarVenta = async(req,res)=>{
 
-    const id = req.params.id;
-
-    const resultado = await ventaModel.mostrarVenta(id);
-
-    if(!resultado){
-        
-        return res.status(400).json({mensaje:"Venta no encontrada"})
-
-    }
+    try{
+        // extraigo la id 
+        const id = req.params.id;
     
-    // Respondo con la informacion de la venta 
-    res.json({resultado});
+        // await para esperar que la promesa se cumpla o rechaze 
+        const resultado = await ventaModel.mostrarVenta(id);
+    
+        // si no se encuentrala venta se envia un mensaje indicando que la venta no fue encontrada
+        if(!resultado){
+            
+            return res.status(400).json({mensaje:"Venta no encontrada"})
+    
+        }
+        
+        // Respondo con la informacion de la venta 
+        res.json({resultado});
+        
+    }
+    // catch para manejo de excepciones 
+    catch(error){
+        
+        console.error(error);
+        
+    }
+
 }
 
-module.exports = {
+export{
     registrarVenta,
     mostrarVenta
 }
