@@ -25,7 +25,15 @@ document.getElementById("volver-login-admin").addEventListener("click",()=>{
 
 })
 
+// logica para cuando se presiona el boton de crear excel de productos
+document.getElementById("crear-excel-productos").addEventListener("click",async()=>{
+    
+    window.location.href = '/productos/excel';
 
+    
+
+
+})
 
 const modalEliminacion = document.querySelector(".modal-eliminacion");
 let idProductoEliminar = null;
@@ -197,7 +205,7 @@ async function renderizarProductos(){
                         <button class="btn-eliminar" data-id="${producto.id}">
                             Eliminar
                         </button>
-                      `
+                    `
                     : `<button class="btn-activar">Activar</button>`
                 }
             </div>

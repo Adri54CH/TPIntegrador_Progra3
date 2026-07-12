@@ -3,14 +3,14 @@ import pool from '../config/db.js';
 
 const obtenerTodos = async()=>{
     
-    // obtengo el resultado de la query
+
     const resultado = await pool.query("SELECT * FROM productos");
     // Me quedo con el array de productos 'productos'
     const [productos] = resultado;
-
+    
+    
     return productos;
     
-
 }
 
 const agregarProducto = async(nombre,categoria,precio,urlImagen) =>{
@@ -56,7 +56,7 @@ const obtenerProducto = async(id)=>{
 
 const comprobarProductoPorNombre = async(nombre)=>{
 
-
+    // console.log("el nombre que llego es",nombre);
     const [rows] = await pool.query("SELECT * FROM productos WHERE nombre=?",[nombre]);
     return rows;
 

@@ -3,6 +3,8 @@ import express from 'express';
 // importo el controlador de product 
 import * as productController from '../controllers/productController.js';
 
+//importo el middleware upload para usarlo en rutas especificas 
+import upload from '../config/multer.js';
 
 const router = express.Router();
 
@@ -11,7 +13,7 @@ const router = express.Router();
 router.get("/",productController.obtenerProductos);
 
 // Endpoint para agregar un producto
-router.post("/agregarProducto",productController.agregarProducto);
+router.post("/agregarProducto",upload.single("imagen"),productController.agregarProducto);
 
 // Endpoint para eliminar un producto
 router.delete("/eliminarProducto/:id",productController.eliminarProducto);
@@ -34,6 +36,9 @@ router.get("/producto/:id",productController.obtenerProducto);
 router.post("/usuarios",productController.crearUsuario);
 
 
+//Endpoint para generar un excel con los productos
+
+router.get("/excel",productController.generarExcelProductos);
 
 // exporto el router 
 export default router;

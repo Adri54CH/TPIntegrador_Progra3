@@ -12,5 +12,7 @@ ventaRouter.post("/",ventaController.registrarVenta);
 //Endpoint para obtener una venta por id 
 ventaRouter.get("/:id",ventaController.mostrarVenta);
 
+
+
 // exporto el router 'ventaRouter'
 export default ventaRouter;

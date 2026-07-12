@@ -13,6 +13,7 @@
             <button id="agregar-producto">Agregar producto</button>
             <button id="agregar-admin">Crear usuario administrador</button>
             <button id="volver-login-admin">Volver al panel admin</button>
+            <button id="crear-excel-productos">Exportar excel de los productos</button>
         </a>
 
         <div class="contenedor-card">
@@ -22,8 +23,14 @@
         
                 <div class="card" data-id="<%= producto.id %>">
         
+                    <!-- La img se carga haciendo una peticion a un servidor externo sin problema de CORS
+                    o por haciendo una peticion al servidor 
+                    backend 
+                        -->
                     <img
-                        src="<%= producto.imagen %>"
+                        src="<%= producto.imagen.startsWith('http') 
+                            ? producto.imagen 
+                            : '/img/' + producto.imagen %>"
                         alt="<%= producto.nombre %>"
                         width="200"
                         class="img-producto"

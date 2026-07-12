@@ -13,7 +13,14 @@ const validarLogin = async(req,res)=>{
         if(!usuario){ 
             return res.json({salida:false,mensaje:"usuario no valido"});
         }
-    
+        
+        
+        // Creo la sesion con los datos del usuario,
+        // si existe se reemplaza 
+
+        req.session.usuario = usuario;
+        
+        
         return res.json({salida:true,mensaje:"el usuario es valido"});
         
     }

@@ -17,7 +17,8 @@
             <button id="cerrar-modal">X</button>
 
             </div>
-            <form action="">
+            <!-- atributo 'enctype' para poder enviar archivos-->
+            <form action="" enctype="multipart/form-data">
 
                 
                 <div class="data">
@@ -33,8 +34,9 @@
 
                 <div class="data">
                     
-                    <label for="">Ingrese la url del producto:</label>
-                <input type="text" id="input-url">
+                    <label for="">Elija una imagen para el producto</label>
+                    <!-- input para seleccionar una imagen -->
+                <input type="file" id="imagen" name="imagen">
                 </div>
                 
                 <div class="data">

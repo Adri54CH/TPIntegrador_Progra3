@@ -7,12 +7,11 @@ import path from 'path';
 // importo cors
 import cors from 'cors';
 
-// importo el modulo dotenv y cargo las variables de entorno en 'process.env'
-import dotenv from 'dotenv';
-dotenv.config();
+
 
 // importo el modulo url para poder transformar la ruta en formato URL al usado por el sistema de directorios 
 import { fileURLToPath } from 'url';
+
 
 // Hago uso de la funcion 'fileURLToPath' para hacer la transformacion a una ruta de sistema 
 const __filename = fileURLToPath(import.meta.url);
@@ -29,10 +28,19 @@ const puerto = 3000;
 // Uso el middleware de aplicacion cors 
 app.use(cors()); 
 
-
 // Se usa el middleware de aplicacion 'express.json()' para poder parsear los datos del body a un objeto .
 app.use(express.json());
 
+
+// importo el modulo 'express-session', un middleware que me permite mantener informacion del usuario entre 
+// diferentes peticiones por medio de sesiones 
+import session from 'express-session';
+
+app.use(session({
+    secret: "clave",
+    resave: false, // para que no guarde la sesion nuevamente si no cambio nada 
+    saveUninitialized: false // para que no se guarden sesiones vacias
+}))
 
 // Hago las importaciones de los routers 
 import routerDashboard from './routes/dashboardRoutes.js';
@@ -59,7 +67,8 @@ app.set("view engine","ejs"); // Configuro el servidor para que se use el motor 
 app.set("views",path.join(__dirname,"views")); // Indica donde esta la ubicacion del directorio 'views' donde se encuentran las plantillas
 
 
-//Middleware para poder servir archivos estaticos desde la carpeta public 
+//Middleware para poder servir archivos estaticos desde la carpeta public , 
+// la carpeta public para a ser la raiz publica 
 app.use(express.static(path.join(__dirname,"../frontend/public")));
 
 

@@ -133,3 +133,13 @@ button:hover{
     
 }
 
+.contenedor-card{
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.card{
+    width: 300px;
+}

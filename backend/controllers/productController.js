@@ -1,6 +1,8 @@
 // importo todas las funciones de 'productModel' 
 import * as productModel from '../models/productModel.js';
 
+// importo el modulo exceljs para trabajar con archivos excel 
+import ExcelJS from 'exceljs';
 
 //Importo el modulo bycrypt 
 import bcrypt from 'bcrypt';
@@ -16,7 +18,8 @@ const obtenerProductos = async(req,res)=>{
     }
     catch(error)
     {
-        res.json({ok:false});
+        console.error(error);
+        return res.status(500).json({ok:false,mensaje:"Error interno del servidor"})
     }
 
 }
@@ -28,9 +31,11 @@ const agregarProducto = async(req,res)=>{
 
     try{
         
-        const {nombre,categoria,precio,urlImagen} = req.body;
+        const {nombre,categoria,precio} = req.body;
     
-    
+        const imagen = req.file.filename;
+
+
         // Valido si el producto existe 
     
         const resultado = await productModel.comprobarProductoPorNombre(nombre);
@@ -43,7 +48,7 @@ const agregarProducto = async(req,res)=>{
     
         }
         
-        await productModel.agregarProducto(nombre,categoria,precio,urlImagen);
+        await productModel.agregarProducto(nombre,categoria,precio,imagen);
     
         return res.json({ok:true});
     }
@@ -181,6 +186,67 @@ const crearUsuario = async(req,res)=>{
 
 }
 
+const generarExcelProductos = async(req,res)=>{
+
+    try{
+        const productos = await productModel.obtenerTodos();
+        
+        // Creo un workbook 
+        const workbook = new ExcelJS.Workbook();
+
+        // Creo una hoja 
+        const worksheet = workbook.addWorksheet("Productos");
+
+        //Defino las columnas de la hoja
+
+        worksheet.columns = [
+        { header: "ID", key: "id", width: 10 },
+        { header: "Nombre", key: "nombre", width: 30 },
+        { header: "Precio", key: "precio", width: 15 },
+        { header: "Imagen", key: "imagen", width: 40 },
+        { header: "Categoría", key: "categoria", width: 20 },
+        { header: "Activo", key: "activo", width: 10 }
+
+        ]; 
+
+        // Agrego una fila a la hoja por cada producto
+        productos.forEach(producto => {
+            worksheet.addRow({
+                id: producto.id,
+                nombre: producto.nombre,
+                precio: producto.precio,
+                categoria: producto.categoria,
+                imagen: producto.imagen,
+                activo: producto.activo ? "Activo" : "Inactivo"
+            })
+        });
+
+
+        res.setHeader("Content-Type","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        res.setHeader(
+            "Content-Disposition",
+            "attachment; filename=productos.xlsx"
+        );
+
+        await workbook.xlsx.write(res);
+
+        res.end();
+
+    }
+    catch(error)
+    {
+        console.error(error);
+        return res.status(500).json({ok:false,mensaje:"Error interno del servidor"})
+        
+    }
+
+    
+
+
+
+}
+
 
 
 export {
@@ -190,6 +256,7 @@ export {
     editarProducto,
     activarProducto,
     obtenerProducto,
-    crearUsuario
+    crearUsuario,
+    generarExcelProductos
 };
 
