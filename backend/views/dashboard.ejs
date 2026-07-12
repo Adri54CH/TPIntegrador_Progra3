@@ -66,6 +66,27 @@
             <% }) %>
         </div>
 
+        <div class="paginacion">
+
+            <!-- si esta ubicado en la pagina 2 en adelante 
+            se muestra el boton para mostrar la pagina anterior -->
+            <% if (pagina > 1) { %>
+            <a href="/dashboard?page=<%= pagina - 1 %>">
+                <button>Anterior</button>
+            </a>
+            <% } %>
+            <!--  se muestra la pagina actual y el total de paginas disponibles-->
+            <span>Página <%= pagina %> de <%= totalPaginas %></span>
+
+            <!-- si la pagina no supero el total de paginas disponibles
+            se muestra el boton para avanzar en la paginacion -->
+            <% if (pagina < totalPaginas) { %>
+                <a href="/dashboard?page=<%= pagina + 1 %>">
+                    <button>Siguiente</button>
+                </a>
+            <% } %>
+
+        </div>
 
     <div class="modal-eliminacion modal">
 
