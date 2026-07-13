@@ -1,7 +1,8 @@
+// Importo el modulo multer 
 import multer from 'multer';
 import path from 'path';
 
-
+// Importo la ruta absoluta 'backend'
 import {backend_directory} from './paths.js';
 
 const storage = multer.diskStorage({
@@ -15,6 +16,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage});
 
+// Exporto el middleware de multer con la configuracion
+// previamente cargada
 export default upload;
 
 

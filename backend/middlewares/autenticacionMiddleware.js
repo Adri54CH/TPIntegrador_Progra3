@@ -1,3 +1,4 @@
+// Middleware de ruta propio
 export const verificarSesion = (req,res,next)=>{
     
     // verifico si la session usuario

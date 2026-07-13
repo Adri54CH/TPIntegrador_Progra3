@@ -20,6 +20,8 @@ const pool = mysql.createPool({
 });
 
 
+
+
 // Exporto el pool 
 export default pool;
 
