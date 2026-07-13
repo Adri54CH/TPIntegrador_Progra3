@@ -6,7 +6,7 @@ const mostrarDashboard = async(req,res)=>{
 
     try{
         // obtengo la cantidad de paginas de la url con 
-        // req.query  
+        // req.query, si el valor es undefined se le asigna 1
         const pagina = Number(req.query.page) || 1;
         //defino el limite de productos que quiero mostrar por pagina
         const limite = 5;    

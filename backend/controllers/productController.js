@@ -10,12 +10,15 @@ import bcrypt from 'bcrypt';
 const obtenerProductos = async(req,res)=>{
     
     try{
-        const productos = await productModel.obtenerTodos(); 
+        // Obtengo todos los productos de la base de datos
+        const productos = await productModel.obtenerTodos();
 
-
-        res.json({ok:true,productos});
+        
+        // Si todo salio bien respondo con los productos
+        return res.json({ok:true,productos});
 
     }
+    // Si la promesa se rechazo lo manejo en el bloque catch 
     catch(error)
     {
         console.error(error);
@@ -75,12 +78,12 @@ const eliminarProducto = async(req,res)=>{
         await productModel.eliminarProducto(id);
     
         // todo salio bien 
-        res.json({success:true});
+        return res.json({success:true});
     }
     // bloque catch para manejar las excepciones 
     catch(error){
         console.error(error);
-
+        return res.json({success:false})
         
     }
 
@@ -102,12 +105,13 @@ const editarProducto = async(req,res)=>{
         // uso de await para esperar que la promesa se resuelva o se rechaze 
         await productModel.editarProducto(id,nuevoNombre,nuevoPrecioLimpio,nuevaUrl,nuevoCategoriaLimpio);
     
-        res.json({mensaje:"Se edito el producto con exito"});
+        return res.json({mensaje:"Se edito el producto con exito"});
 
         
     }catch(error){
         console.error(error);
-        
+        return res.json({mensaje:"Error interno del servidor"});
+
     }
 
 
@@ -124,12 +128,13 @@ const activarProducto = async(req,res)=>{
 
         await productModel.activarProducto(id);
     
-        res.json({mensaje:"Producto activado"});
+        return res.json({mensaje:"Producto activado"});
 
 
         
     }catch(error){
         console.error(error);
+        return res.json({mensaje:"Error interno del servidor"});
 
     }
     
@@ -137,6 +142,7 @@ const activarProducto = async(req,res)=>{
 
 }
 
+// Obtiene un producto individual 
 const obtenerProducto = async(req,res)=>{
 
     try{
@@ -146,13 +152,13 @@ const obtenerProducto = async(req,res)=>{
         
         const producto = await productModel.obtenerProducto(id);
     
-        res.json({mensaje:"Producto obtenido con exito",producto});
+        return res.json({mensaje:"Producto obtenido con exito",producto});
 
         
     }
     catch(error){
         console.error(error);
-
+        return res.json({mensaje:"Error interno del servidor"});
     }
 
 
@@ -172,13 +178,16 @@ const crearUsuario = async(req,res)=>{
         // espero a que la promesa se resuelva o se rechaze
         await productModel.crearUsuario(email,hash);
     
-        res.json({mensaje:"Administrador creado con exito"});
+        return res.json({mensaje:"Administrador creado con exito"});
 
 
 
     } // manejo de expeciones generadas por rechazos de las promesas o errores ocurridos dentro del try 
     catch(error){
         console.error(error);
+        return res.json({mensaje:"Error interno del servidor"});
+
+
     }
 
 
@@ -222,16 +231,20 @@ const generarExcelProductos = async(req,res)=>{
         });
 
 
+        // indico que tipo de contenido esta entregando el servidor al  cliente 
         res.setHeader("Content-Type","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
+        // indico que tiene que hacer el navegador con el contenido (descargarlo en este caso)
         res.setHeader(
             "Content-Disposition",
             "attachment; filename=productos.xlsx"
         );
 
+        // escribo todo el contenido del excel en la respuesta 
         await workbook.xlsx.write(res);
 
-        res.end();
+        // finalizo la respuesta http 
+        return res.end();
 
     }
     catch(error)

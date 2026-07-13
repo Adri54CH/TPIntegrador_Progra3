@@ -10,10 +10,18 @@ export async function getProductos() {
 }
 
 const card = (producto) => {
-    let urlImagen = producto.imagen ? `/images/${producto.imagen}` : '/images/default.png';
     
+    // creo una variable para guardar el valor de la imagen
+    let urlImagen;
+
+    // si la imagen empieza con http me guardo el valor directamente 
     if (producto.imagen && producto.imagen.startsWith('http')) {
         urlImagen = producto.imagen; 
+    }
+    // si no le agrego el string para cargarlo desde el servidor haciendo
+    // referencia a la carpeta img de la carpeta public 
+    else{
+        urlImagen = "/img/" + producto.imagen;
     }
 
     return `

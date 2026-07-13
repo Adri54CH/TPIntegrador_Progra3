@@ -4,8 +4,6 @@ document.querySelector("form").addEventListener("submit",(e)=>{
     
     e.preventDefault();
 
-    
-
             
     const nombre  = document.getElementById("input-nombre").value;
     const categoria  = document.getElementById("input-categoria").value;
@@ -38,14 +36,6 @@ document.querySelector("form").addEventListener("submit",(e)=>{
         }})
         .then(() => {
 
-            // Limpio los inputs 
-            
-            document.getElementById("input-nombre").value = "";
-            document.getElementById("input-categoria").value = ""
-            document.getElementById("input-precio").value = ""
-            document.getElementById("input-url").value = ""
-
-
             // cambio la pagina 'altaProducto'
 
             window.location.href = "/dashboard";
@@ -55,7 +45,7 @@ document.querySelector("form").addEventListener("submit",(e)=>{
 })
 
 // Logica para cerrar el formulario 
-document.getElementById("cerrar-modal").addEventListener("click",()=>{
+document.getElementById("cerrar-formulario").addEventListener("click",()=>{
 
     // cambio de pagina 
     window.location.href = "/dashboard";

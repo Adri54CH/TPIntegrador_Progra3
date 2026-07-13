@@ -3,10 +3,6 @@ document.getElementById("agregar-admin").addEventListener("click",()=>{
     window.location.href = "/formUsuario.html";
 
     
-
-
-
-
 })
 
 
@@ -30,7 +26,7 @@ document.getElementById("crear-excel-productos").addEventListener("click",async(
     
     window.location.href = '/productos/excel';
 
-    
+
 
 
 })
@@ -65,12 +61,10 @@ document.querySelector(".btn-confirmar-eliminacion").addEventListener("click",()
     //Funcion para eliminar el producto
     eliminarProducto(idProductoEliminar).then(()=>{
         
-        // Vuelvo a renderizar los productos d
-        renderizarProductos();
-        
-        // Ocultar el modal de confirmacion 
+    
+        // Hago una peticion para cargar el dashboard
 
-        modalEliminacion.style.display = "none";
+        window.location.href = "/dashboard";
 
 
     })
@@ -112,7 +106,6 @@ document.addEventListener("click",(e)=>{
 })
 
 
-// Funcion para renderizar los productos
 
 let idProductoActivar = null;
 const modalActivacion = document.querySelector(".modal-activacion");
@@ -142,9 +135,6 @@ document.querySelector(".btn-confirmar-activacion").addEventListener("click",()=
 
     activarProducto(idProductoActivar);
 
-    // Dejar de mostrar el modal 
-
-    modalActivacion.style.display = "none";
 
 
     
@@ -157,11 +147,9 @@ function activarProducto(idProducto){
     }).then(res => res.json())
     .then(res => {
         
-        console.log(res);
+        // Hago una redireccion para volver a cargar dashboard
 
-
-        // Renderizo los productos
-        renderizarProductos();
+        window.location.href = "/dashboard";
 
 
         
@@ -171,49 +159,6 @@ function activarProducto(idProducto){
 
     
 
-
-}
-
-async function renderizarProductos(){
-    
-    const productos = await obtenerProductos();
-    
-    console.log(productos);
-
-    
-    const contenedorCard = document.querySelector(".contenedor-card");
-
-    
-    contenedorCard.innerHTML = "";
-    
-    productos.forEach((producto)=>{
-        
-        
-        contenedorCard.innerHTML += `
-            <div class="card" data-id="${producto.id}">
-                <img src="${producto.imagen}" width="200" class="img-producto">
-
-                <h2 class="nombre-producto">${producto.nombre}</h2>
-                <p class="categoria-producto">Categoría: ${producto.categoria}</p>
-                <p class="precio-producto">Precio: $${producto.precio}</p>
-                <p>Estado: ${producto.activo ? "Activo" : "Inactivo"}</p>
-
-                ${
-                    producto.activo
-                    ? `
-                        <button class="btn-editar">Editar</button>
-                        <button class="btn-eliminar" data-id="${producto.id}">
-                            Eliminar
-                        </button>
-                    `
-                    : `<button class="btn-activar">Activar</button>`
-                }
-            </div>
-
-            <hr>
-        `;
-
-    })
 
 }
 

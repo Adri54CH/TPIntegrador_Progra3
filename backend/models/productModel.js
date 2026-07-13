@@ -1,29 +1,41 @@
 // importo 'pool' del archivo de configuracion
 import pool from '../config/db.js';
 
-const obtenerTodos = async(pagina,limite)=>{
+// parametros opcionales nulos 
+const obtenerTodos = async(pagina=null,limite=null)=>{
+
+    // verifico si los valores son valores truthy 
+    if(pagina && limite){
+        
+        // calculo el desplazamiento o la cantidad 
+        // de productos que tengo que saltar 
+        const offset = (pagina - 1) * limite;
     
-    // calculo el desplazamiento o la cantidad 
-    // de productos que tengo que saltar 
-    const offset = (pagina - 1) * limite;
-
-    // obtengo los productos de esa esa pagina 
-    const [productos] = await pool.query("SELECT * FROM productos LIMIT ? OFFSET ?",[limite,offset]);
+        // obtengo los productos de esa esa pagina 
+        const [productos] = await pool.query("SELECT * FROM productos LIMIT ? OFFSET ?",[limite,offset]);
+        
+        // obtengo la cantidad total de productos 
+        // aplico doble destructuring 
+        const [[resultado]] = await pool.query("SELECT COUNT(*) AS total FROM productos");
     
-    // obtengo la cantidad total de productos 
-    // aplico doble destructuring 
-    const [[resultado]] = await pool.query("SELECT COUNT(*) AS total FROM productos");
+        // calculo cuantas paginas existen 
+    
+        const totalPaginas = Math.ceil(resultado.total / limite);
+    
+        // devuelvo los productos a mostrar y la cantidad de paginas
+    
+        return {
+            productos,
+            totalPaginas
+        }    
 
-    // calculo cuantas paginas existen 
+    }
+    // obtengo los productos de la base de datos 
+    const [productos] = await pool.query("SELECT * FROM productos");
 
-    const totalPaginas = Math.ceil(resultado.total / limite);
-
-    // devuelvo los productos a mostrar y la cantidad de paginas
-
-    return {
-        productos,
-        totalPaginas
-    }    
+    // retorno los productos
+    return productos;    
+    
 
     
 }

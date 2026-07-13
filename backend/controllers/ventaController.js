@@ -5,7 +5,7 @@ const registrarVenta = async(req,res)=>{
 
     try{
 
-        // extraigo el nombre del cliente y el carrito del body
+        // Extraigo el nombre del cliente y el carrito del body
         const {nombreCliente,carrito}=req.body;
         let total = 0;
     
@@ -18,14 +18,14 @@ const registrarVenta = async(req,res)=>{
         
         const idVenta = await ventaModel.registrarVenta(total,nombreCliente,carrito);
     
-        res.json({ok:true,idVenta,total});
+        return res.json({ok:true,idVenta,total});
 
         
     }
     // manejo de excepciones 
     catch(error){
         console.error(error);
-
+        return res.json({ok:false,mensaje:"Error interno del servidor"});s
     }
 
 
@@ -50,14 +50,15 @@ const mostrarVenta = async(req,res)=>{
         }
         
         // Respondo con la informacion de la venta 
-        res.json({resultado});
+        return res.json({resultado});
         
     }
     // catch para manejo de excepciones 
     catch(error){
         
         console.error(error);
-        
+        //Respondo enviando un mensaje de error del servidor
+        return res.json({mensaje:"Error interno del servidor"});
     }
 
 }
